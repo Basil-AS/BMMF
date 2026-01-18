@@ -1,0 +1,52 @@
+# Игнорируемые файлы для Fair Meeting Point Finder
+
+# API ключи и секреты
+*.key
+*.secret
+.env
+.env.local
+.env.*.local
+secrets.json
+config.local.js
+
+# Логи
+*.log
+logs/
+debug/
+
+# Временные файлы
+*.tmp
+*.temp
+*.bak
+*.swp
+*~
+
+# Системные файлы
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Node.js (если будет добавлен)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Сборка
+dist/
+build/
+*.min.js
+*.min.css
+
+# Тесты
+coverage/
+.nyc_output/

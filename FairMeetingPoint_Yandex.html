@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fair Meeting Point Finder v2.7</title>
+  <meta name="description" content="Поиск оптимальной точки встречи с равным временем в пути">
+  <style>
+    :root {
+      --bg: #0a0c0f;
+      --panel: #11141a;
+      --panel2: #0d1015;
+      --panel3: #181d26;
+      --text: #e8ecf2;
+      --muted: #8a95a5;
+      --line: #252d3a;
+      --accent: #4d9fff;
+      --accent2: #38bdf8;
+      --ok: #34d399;
+      --warn: #fbbf24;
+      --bad: #f87171;
+      --accent-soft: rgba(77,159,255,0.12);
+      --accent-border: rgba(77,159,255,0.3);
+      --ok-soft: rgba(52,211,153,0.1);
+      --ok-border: rgba(52,211,153,0.3);
+      --warn-soft: rgba(251,191,36,0.1);
+      --warn-border: rgba(251,191,36,0.3);
+      --bad-soft: rgba(248,113,113,0.1);
+      --bad-border: rgba(248,113,113,0.3);
+      --sidebar-width: 440px;
+    }
+    [data-theme="light"] {
+      --bg: #f5f7fa;
+      --panel: #ffffff;
+      --panel2: #f0f2f5;
+      --panel3: #e5e8ec;
+      --text: #1a1d24;
+      --muted: #5a6578;
+      --line: #d0d5dd;
+      --accent: #2563eb;
+      --accent2: #0891b2;
+      --ok: #059669;
+      --warn: #d97706;
+      --bad: #dc2626;
+      --accent-soft: rgba(37,99,235,0.08);
+      --accent-border: rgba(37,99,235,0.25);
+      --ok-soft: rgba(5,150,105,0.08);
+      --ok-border: rgba(5,150,105,0.25);
+      --warn-soft: rgba(217,119,6,0.08);
+      --warn-border: rgba(217,119,6,0.25);
+      --bad-soft: rgba(220,38,38,0.08);
+      --bad-border: rgba(220,38,38,0.25);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      overflow: hidden;
+    }
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--panel2); }
+    ::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+    
+    .app { display: flex; flex-direction: column; height: 100vh; }
+    .main { display: flex; flex: 1; min-height: 0; }
+    
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 16px; background: var(--panel); border-bottom: 1px solid var(--line);
+      gap: 12px; flex-wrap: wrap; flex-shrink: 0;
+    }
+    header h1 { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+    header h1 span { color: var(--accent); }
+    header .subtitle { font-size: 10px; color: var(--muted); }
+    .header-actions { display: flex; gap: 6px; align-items: center; }
+    
+    .sidebar {
+      width: var(--sidebar-width); min-width: 340px; max-width: 55vw;
+      display: flex; flex-direction: column; background: var(--bg);
+      border-right: 1px solid var(--line); overflow: hidden; resize: horizontal;
+    }
+    .sidebar-scroll { flex: 1; overflow-y: auto; padding: 8px; display: flex; flex-direction: column; gap: 8px; }
+    
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; flex-shrink: 0; }
+    .card-header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 10px; background: var(--panel2); cursor: pointer;
+      user-select: none; border-bottom: 1px solid var(--line);
+    }
+    .card-header h2 { font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+    .card-header .badge { font-size: 9px; padding: 1px 5px; border-radius: 8px; background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent-border); }
+    .card-header .toggle { font-size: 9px; color: var(--muted); transition: transform 0.2s; }
+    .card.collapsed .card-header .toggle { transform: rotate(-90deg); }
+    .card.collapsed .card-body { display: none; }
+    .card-body { padding: 10px; }
+    
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 6px; }
+    .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 6px; }
+    .row4 { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 6px; margin-bottom: 6px; }
+    .full { margin-bottom: 6px; }
+    label { display: flex; align-items: center; gap: 4px; font-size: 9px; color: var(--muted); margin-bottom: 3px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.3px; }
+    input, select, textarea, button {
+      width: 100%; padding: 6px 8px; font-size: 11px; border: 1px solid var(--line);
+      border-radius: 5px; background: var(--panel2); color: var(--text); outline: none; transition: all 0.15s;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+    input::placeholder, textarea::placeholder { color: var(--muted); opacity: 0.6; }
+    button { cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; }
+    button:hover:not(:disabled) { border-color: var(--accent); }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
+    .btn-accent { background: var(--accent-soft); border-color: var(--accent-border); color: var(--accent); }
+    .btn-accent:hover:not(:disabled) { background: var(--accent); color: #fff; }
+    .btn-ok { background: var(--ok-soft); border-color: var(--ok-border); color: var(--ok); }
+    .btn-warn { background: var(--warn-soft); border-color: var(--warn-border); color: var(--warn); }
+    .btn-bad { background: var(--bad-soft); border-color: var(--bad-border); color: var(--bad); }
+    .btn-ghost { background: transparent; }
+    .btn-sm { padding: 4px 6px; font-size: 10px; }
+    .btn-lg { padding: 10px; font-size: 12px; }
+    
+    .help-btn {
+      width: 14px; height: 14px; padding: 0; font-size: 9px; border-radius: 50%;
+      background: var(--accent-soft); border: 1px solid var(--accent-border); color: var(--accent);
+      cursor: pointer; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .help-btn:hover { background: var(--accent); color: #fff; }
+    
+    .copy-btn { width: auto; padding: 2px 6px; font-size: 9px; margin-left: 4px; }
+    
+    .status { padding: 6px 8px; border-radius: 5px; font-size: 10px; line-height: 1.3; border: 1px solid var(--line); background: var(--panel2); margin-top: 6px; }
+    .status.ok { background: var(--ok-soft); border-color: var(--ok-border); }
+    .status.warn { background: var(--warn-soft); border-color: var(--warn-border); }
+    .status.bad { background: var(--bad-soft); border-color: var(--bad-border); }
+    .status.info { background: var(--accent-soft); border-color: var(--accent-border); }
+    
+    .points-list { max-height: 140px; overflow-y: auto; }
+    .point-item {
+      display: grid; grid-template-columns: 6px 1fr auto; gap: 8px; align-items: center;
+      padding: 5px; background: var(--panel2); border-radius: 5px; margin-bottom: 4px;
+      border: 1px solid transparent; transition: all 0.15s;
+    }
+    .point-item:hover { border-color: var(--accent-border); }
+    .point-item:last-child { margin-bottom: 0; }
+    .point-dot { width: 6px; height: 6px; border-radius: 50%; }
+    .point-info { min-width: 0; }
+    .point-name { font-size: 10px; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+    .point-name input { padding: 2px 4px; font-size: 10px; font-weight: 600; width: 90px; }
+    .point-coords { font-size: 8px; color: var(--muted); font-family: monospace; }
+    .point-transport { font-size: 8px; padding: 1px 4px; border-radius: 3px; background: var(--panel3); }
+    .point-transport.auto { background: rgba(251,191,36,0.15); color: var(--warn); }
+    .point-actions { display: flex; gap: 2px; }
+    .point-actions button { padding: 2px 4px; font-size: 9px; }
+    .empty-state { text-align: center; padding: 12px; color: var(--muted); font-size: 10px; }
+    
+    .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
+    .chip { display: inline-flex; align-items: center; gap: 3px; padding: 3px 6px; font-size: 9px; border-radius: 10px; background: var(--panel2); border: 1px solid var(--line); }
+    .chip .val { font-weight: 700; font-family: monospace; }
+    .chip.ok { background: var(--ok-soft); border-color: var(--ok-border); }
+    .chip.warn { background: var(--warn-soft); border-color: var(--warn-border); }
+    .chip.bad { background: var(--bad-soft); border-color: var(--bad-border); }
+    
+    .progress-container { margin-top: 6px; }
+    .progress-bar { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); transition: width 0.3s; }
+    .progress-text { font-size: 9px; color: var(--muted); margin-top: 3px; display: flex; justify-content: space-between; }
+    
+    .live-stats { display: flex; gap: 8px; margin-top: 6px; font-size: 9px; flex-wrap: wrap; }
+    .live-stat { display: flex; align-items: center; gap: 3px; }
+    .live-stat .icon { font-size: 10px; }
+    .live-stat .num { font-weight: 700; font-family: monospace; }
+    .live-stat.ok .num { color: var(--ok); }
+    .live-stat.bad .num { color: var(--bad); }
+    
+    .result-summary { background: var(--ok-soft); border: 1px solid var(--ok-border); border-radius: 6px; padding: 10px; margin-bottom: 8px; }
+    .result-summary h3 { font-size: 12px; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+    .result-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+    .metric-box { background: var(--panel); padding: 4px; border-radius: 4px; text-align: center; }
+    .metric-box .val { font-size: 13px; font-weight: 700; color: var(--accent); font-family: monospace; }
+    .metric-box .label { font-size: 7px; color: var(--muted); text-transform: uppercase; }
+    
+    .coords-row { display: flex; align-items: center; gap: 4px; font-family: monospace; font-size: 9px; color: var(--muted); margin-bottom: 6px; }
+    .coords-row code { flex: 1; }
+    
+    .route-times { margin-top: 8px; font-size: 10px; }
+    .route-time-item { display: flex; align-items: center; gap: 6px; padding: 3px 0; border-bottom: 1px solid var(--line); }
+    .route-time-item:last-child { border-bottom: none; }
+    .route-time-item .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .route-time-item .name { flex: 1; }
+    .route-time-item .time { font-weight: 700; font-family: monospace; color: var(--accent); }
+    .route-time-item .walk-extra { font-size: 8px; color: var(--warn); margin-left: 4px; }
+    
+    .top-results { margin-top: 8px; max-height: 200px; overflow-y: auto; }
+    .top-result-item {
+      display: grid; grid-template-columns: 20px 1fr auto; gap: 6px; align-items: center;
+      padding: 6px; background: var(--panel2); border-radius: 5px; margin-bottom: 4px;
+      border: 1px solid var(--line); cursor: pointer; transition: all 0.15s;
+    }
+    .top-result-item:hover { border-color: var(--accent-border); }
+    .top-result-item.active { border-color: var(--ok); background: var(--ok-soft); }
+    .top-result-item .rank { font-size: 11px; font-weight: 700; color: var(--muted); text-align: center; }
+    .top-result-item .rank.gold { color: #fbbf24; }
+    .top-result-item .rank.silver { color: #94a3b8; }
+    .top-result-item .rank.bronze { color: #d97706; }
+    .top-result-item .info { font-size: 10px; }
+    .top-result-item .times { font-size: 9px; color: var(--muted); font-family: monospace; }
+    .top-result-item .metric-tag { font-size: 8px; padding: 1px 4px; border-radius: 3px; background: var(--accent-soft); color: var(--accent); margin-left: 4px; }
+    .top-result-item .walk-tag { font-size: 8px; padding: 1px 4px; border-radius: 3px; background: var(--ok-soft); color: var(--ok); margin-left: 2px; }
+    .top-result-item .score { font-size: 11px; font-weight: 700; font-family: monospace; }
+    
+    .load-more-btn { margin-top: 4px; padding: 6px; font-size: 10px; }
+    
+    .routes-panel { max-height: 200px; overflow-y: auto; margin-top: 8px; }
+    .route-card { background: var(--panel2); border-radius: 5px; padding: 6px; margin-bottom: 4px; border: 1px solid var(--line); }
+    .route-card:last-child { margin-bottom: 0; }
+    .route-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3px; }
+    .route-header .name { font-size: 10px; font-weight: 600; display: flex; align-items: center; gap: 4px; }
+    .route-header .time { font-size: 11px; font-weight: 700; color: var(--accent); font-family: monospace; }
+    .route-segments { display: flex; flex-wrap: wrap; gap: 2px; }
+    .segment { display: inline-flex; align-items: center; gap: 2px; padding: 2px 4px; font-size: 8px; border-radius: 3px; background: var(--panel3); border: 1px solid var(--line); }
+    .segment.walk { background: rgba(148,163,184,0.15); }
+    .segment.bus { background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.3); }
+    .segment.trolleybus { background: rgba(59,130,246,0.15); border-color: rgba(59,130,246,0.3); }
+    .segment.tram { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.3); }
+    .segment.metro { background: rgba(168,85,247,0.15); border-color: rgba(168,85,247,0.3); }
+    .segment.suburban { background: rgba(251,146,60,0.15); border-color: rgba(251,146,60,0.3); }
+    .segment.transfer { background: var(--warn-soft); border-color: var(--warn-border); }
+    .segment.auto { background: rgba(251,191,36,0.2); border-color: rgba(251,191,36,0.4); }
+    
+    .ultra-compare { margin-top: 8px; }
+    .ultra-table { width: 100%; font-size: 9px; border-collapse: collapse; }
+    .ultra-table th, .ultra-table td { padding: 4px; text-align: left; border-bottom: 1px solid var(--line); }
+    .ultra-table th { font-weight: 600; color: var(--muted); text-transform: uppercase; font-size: 8px; }
+    .ultra-table td.num { text-align: right; font-family: monospace; }
+    .ultra-table tr.best td { background: var(--ok-soft); }
+    .ultra-table .winner { color: var(--ok); font-weight: 700; }
+    .ultra-table .coords-cell { font-size: 7px; font-family: monospace; color: var(--muted); }
+    
+    textarea.log { font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace; font-size: 9px; line-height: 1.3; min-height: 100px; resize: vertical; background: var(--bg); }
+    
+    .map-container { flex: 1; position: relative; }
+    #map { width: 100%; height: 100%; }
+    
+    .hint { font-size: 9px; color: var(--muted); margin-top: 4px; line-height: 1.3; }
+    .hint a { color: var(--accent); }
+    
+    .theme-btn { width: auto; padding: 5px 8px; background: var(--panel2); border: 1px solid var(--line); font-size: 11px; }
+    hr { border: none; border-top: 1px solid var(--line); margin: 8px 0; }
+    
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 9999; opacity: 0; visibility: hidden; transition: all 0.2s; }
+    .modal-overlay.show { opacity: 1; visibility: visible; }
+    .modal { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; max-width: 650px; width: 90%; max-height: 85vh; overflow-y: auto; }
+    .modal h3 { margin-bottom: 12px; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+    .modal-actions { display: flex; gap: 6px; justify-content: flex-end; margin-top: 12px; }
+    .modal-actions button { width: auto; }
+    
+    .help-content { font-size: 11px; line-height: 1.6; }
+    .help-content h4 { font-size: 12px; margin: 12px 0 6px; color: var(--accent); display: flex; align-items: center; gap: 6px; }
+    .help-content h4:first-child { margin-top: 0; }
+    .help-content p { margin-bottom: 8px; }
+    .help-content ul { margin: 6px 0 10px 16px; }
+    .help-content li { margin-bottom: 4px; }
+    .help-content code { background: var(--panel2); padding: 1px 4px; border-radius: 3px; font-size: 10px; }
+    .help-content .metric-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 6px; padding: 8px; margin-bottom: 6px; }
+    .help-content .metric-card h5 { font-size: 11px; margin-bottom: 3px; }
+    .help-content .metric-card .formula { font-family: monospace; font-size: 10px; color: var(--accent); margin: 3px 0; }
+    .help-content .metric-card .when { font-size: 10px; color: var(--ok); }
+    .help-content .metric-card .warn { font-size: 10px; color: var(--warn); }
+    .help-content table { width: 100%; font-size: 10px; border-collapse: collapse; margin: 8px 0; }
+    .help-content table th, .help-content table td { padding: 4px 6px; text-align: left; border-bottom: 1px solid var(--line); }
+    .help-content table th { background: var(--panel2); font-weight: 600; }
+    
+    .datetime-row { display: flex; gap: 4px; align-items: flex-end; }
+    .datetime-row input { flex: 1; }
+    .datetime-buttons { display: flex; gap: 2px; }
+    .datetime-buttons button { width: auto; padding: 6px 8px; font-size: 10px; }
+    
+    .time-mode-toggle { display: flex; gap: 2px; margin-bottom: 4px; }
+    .time-mode-toggle button { flex: 1; padding: 4px 8px; font-size: 9px; }
+    .time-mode-toggle button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    
+    .grid-preview-btn { padding: 6px; font-size: 9px; }
+    .grid-preview-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    
+    .heatmap-toggle { margin-top: 4px; }
+    .heatmap-toggle label { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 10px; text-transform: none; }
+    .heatmap-toggle input[type="checkbox"] { width: auto; }
+    
+    @media (max-width: 900px) {
+      .main { flex-direction: column; }
+      .sidebar { width: 100%; max-width: none; height: 50vh; resize: vertical; border-right: none; border-bottom: 1px solid var(--line); }
+      .map-container { height: 50vh; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h1>🗺️ <span>Fair Meeting Point</span> Finder</h1>
+        <div class="subtitle">Оптимальная точка встречи с равным временем в пути • v2.7</div>
+      </div>
+      <div class="header-actions">
+        <button class="theme-btn" id="themeBtn">🌙</button>
+        <button class="theme-btn" id="btnHelp">❓ Справка</button>
+      </div>
+    </header>
+    
+    <div class="main">
+      <div class="sidebar">
+        <div class="sidebar-scroll">
+          <!-- API Card -->
+          <div class="card" id="cardApi">
+            <div class="card-header" onclick="UI.toggleCard('cardApi')">
+              <h2>🔑 API <span class="badge" id="apiBadge">offline</span></h2>
+              <span class="toggle">▼</span>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div>
+                  <label>API ключ Яндекс.Карт</label>
+                  <input type="password" id="apiKey" placeholder="Введите ключ...">
+                </div>
+                <div style="display:flex;flex-direction:column;justify-content:flex-end;gap:3px;">
+                  <button class="btn-sm btn-ghost" id="btnToggleKey">👁</button>
+                  <button class="btn-accent btn-sm" id="btnLoadApi">Подключить</button>
+                </div>
+              </div>
+              <div class="status warn" id="apiStatus">⏳ Введите API ключ</div>
+              <div class="hint">Ключ хранится в браузере. <a href="https://developer.tech.yandex.ru/" target="_blank">Получить ключ</a></div>
+            </div>
+          </div>
+          
+          <!-- Points Card -->
+          <div class="card" id="cardPoints">
+            <div class="card-header" onclick="UI.toggleCard('cardPoints')">
+              <h2>📍 Участники <span class="badge" id="pointsBadge">0</span></h2>
+              <span class="toggle">▼</span>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div>
+                  <label>Адрес или координаты</label>
+                  <input type="text" id="inputAddr" placeholder="Москва, Тверская 1" disabled>
+                </div>
+                <div>
+                  <label>Имя</label>
+                  <input type="text" id="inputName" placeholder="Андрей" disabled>
+                </div>
+              </div>
+              <div class="row">
+                <div>
+                  <label>Транспорт</label>
+                  <select id="inputTransport" disabled>
+                    <option value="masstransit">🚇 Общественный</option>
+                    <option value="auto">🚗 Автомобиль</option>
+                  </select>
+                </div>
+                <div style="display:flex;align-items:flex-end;gap:3px;">
+                  <button class="btn-accent btn-sm" id="btnAddPoint" disabled>➕</button>
+                  <button class="btn-ghost btn-sm" id="btnMyLocation" disabled>📍</button>
+                </div>
+              </div>
+              <hr>
+              <div class="points-list" id="pointsList">
+                <div class="empty-state">Кликните по карте или введите адрес</div>
+              </div>
+              <div class="row" style="margin-top:6px;">
+                <button class="btn-bad btn-sm" id="btnClearPoints" disabled>🗑 Очистить</button>
+                <button class="btn-ghost btn-sm" id="btnFitAll" disabled>🔍 Показать все</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Algorithm Card -->
+          <div class="card" id="cardAlgo">
+            <div class="card-header" onclick="UI.toggleCard('cardAlgo')">
+              <h2>⚙️ Алгоритм поиска</h2>
+              <span class="toggle">▼</span>
+            </div>
+            <div class="card-body">
+              <div class="full">
+                <label>Метрика справедливости <button class="help-btn" onclick="UI.openModal('modalMetrics');event.stopPropagation();">?</button></label>
+                <select id="selMetric" disabled>
+                  <option value="minimax">⏱ MiniMax — минимум максимального времени</option>
+                  <option value="range">📏 Range — минимум разницы (max−min)</option>
+                  <option value="composite">🎯 Composite — баланс скорости и справедливости</option>
+                  <option value="nearmetro">🚇 NearMetro — минимум пешей ходьбы от транспорта</option>
+                  <option value="maxdev">📊 MaxDev — минимум отклонения от среднего</option>
+                  <option value="variance">📈 Variance — минимум дисперсии времён</option>
+                  <option value="ultra">🔬 ULTRA — сравнение ВСЕХ метрик</option>
+                </select>
+              </div>
+              
+              <div class="row">
+                <div>
+                  <label>Сетка N×N <button class="help-btn" onclick="UI.openModal('modalGridHelp');event.stopPropagation();">?</button></label>
+                  <input type="number" id="gridSize" value="6" min="3" max="12" disabled>
+                </div>
+                <div>
+                  <label>Таймаут сек <button class="help-btn" onclick="UI.openModal('modalTimeoutHelp');event.stopPropagation();">?</button></label>
+                  <input type="number" id="timeout" value="25" min="5" max="60" disabled>
+                </div>
+              </div>
+              <div class="row3">
+                <div>
+                  <label>Расшир. H % <button class="help-btn" onclick="UI.openModal('modalExpandHelp');event.stopPropagation();">?</button></label>
+                  <input type="number" id="gridExpandH" value="20" min="0" max="100" disabled>
+                </div>
+                <div>
+                  <label>Расшир. V %</label>
+                  <input type="number" id="gridExpandV" value="20" min="0" max="100" disabled>
+                </div>
+                <div style="display:flex;align-items:flex-end;">
+                  <button class="btn-ghost grid-preview-btn" id="btnShowGrid" disabled title="Показать сетку на карте">📐</button>
+                </div>
+              </div>
+              
+              <div class="heatmap-toggle">
+                <label><input type="checkbox" id="chkHeatmap" disabled> 🌡️ Показать тепловую карту после поиска</label>
+              </div>
+              
+              <div class="full">
+                <label>Время <button class="help-btn" onclick="UI.openModal('modalTimeHelp');event.stopPropagation();">?</button></label>
+                <div class="time-mode-toggle">
+                  <button id="btnTimeDeparture" class="active" disabled>🚀 Отправление</button>
+                  <button id="btnTimeArrival" disabled>🏁 Прибытие</button>
+                </div>
+                <div class="datetime-row">
+                  <input type="datetime-local" id="departureTime" disabled>
+                  <div class="datetime-buttons">
+                    <button class="btn-ghost" id="btnTimeDown" disabled title="−15 мин">◀</button>
+                    <button class="btn-ghost" id="btnNow" disabled title="Сейчас">⏱</button>
+                    <button class="btn-ghost" id="btnTimeUp" disabled title="+15 мин">▶</button>
+                  </div>
+                </div>
+                <div class="hint">🖱 Колесо мыши: вверх +15 мин, вниз −15 мин</div>
+              </div>
+              
+              <div class="row">
+                <button class="btn-accent btn-lg" id="btnFind" disabled>🔍 Найти точку встречи</button>
+                <button class="btn-bad btn-sm" id="btnCancel" disabled style="width:auto;padding:10px;">⛔</button>
+              </div>
+              
+              <div class="status info" id="findStatus">Добавьте минимум 2 участника</div>
+              
+              <div class="progress-container" id="progressContainer" style="display:none;">
+                <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                <div class="progress-text">
+                  <span id="progressPhase">Фаза 1</span>
+                  <span id="progressPct">0%</span>
+                </div>
+              </div>
+              
+              <div class="live-stats" id="liveStats" style="display:none;">
+                <div class="live-stat"><span class="icon">📤</span> Отправлено: <span class="num" id="statSent">0</span></div>
+                <div class="live-stat ok"><span class="icon">✅</span> Успешно: <span class="num" id="statOk">0</span></div>
+                <div class="live-stat bad"><span class="icon">❌</span> Ошибок: <span class="num" id="statFail">0</span></div>
+                <div class="live-stat"><span class="icon">📊</span> Всего: <span class="num" id="statTotal">0</span>/<span class="num" id="statExpected">0</span></div>
+              </div>
+              
+              <div class="hint">
+                <strong>~Запросов:</strong> <span id="estRequests">—</span> | 
+                <strong>~Стоимость:</strong> <span id="estCost">бесплатно</span>
+                <button class="help-btn" onclick="UI.openModal('modalPricing');event.stopPropagation();" style="margin-left:4px;">₽</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Results Card -->
+          <div class="card" id="cardResults">
+            <div class="card-header" onclick="UI.toggleCard('cardResults')">
+              <h2>📊 Результаты <span class="badge" id="resultsBadge">—</span></h2>
+              <span class="toggle">▼</span>
+            </div>
+            <div class="card-body">
+              <div id="resultsContent">
+                <div class="empty-state">Запустите поиск</div>
+              </div>
+              <div id="ultraCompareContainer" style="display:none;"></div>
+              <div class="routes-panel" id="routesPanel" style="display:none;"></div>
+            </div>
+          </div>
+          
+          <!-- Stats Card -->
+          <div class="card collapsed" id="cardStats">
+            <div class="card-header" onclick="UI.toggleCard('cardStats')">
+              <h2>📈 Статистика сессии</h2>
+              <span class="toggle">▼</span>
+            </div>
+            <div class="card-body">
+              <div class="chips">
+                <div class="chip">📤 Всего запросов: <span class="val" id="chipTotal">0</span></div>
+                <div class="chip ok">✅ Успешно: <span class="val" id="chipOk">0</span></div>
+                <div class="chip bad">❌ Ошибок: <span class="val" id="chipFail">0</span></div>
+              </div>
+              <div class="chips">
+                <div class="chip">🗺️ Геокодирование: <span class="val" id="chipGeo">0</span></div>
+                <div class="chip">🛣️ Маршруты: <span class="val" id="chipRoute">0</span></div>
+                <div class="chip warn">⏱ Таймауты: <span class="val" id="chipTimeout">0</span></div>
+              </div>
+              <div class="row" style="margin-top:6px;">
+                <button class="btn-ghost btn-sm" id="btnResetStats">🔄 Сброс</button>
+                <button class="btn-ghost btn-sm" id="btnExportStats">📤 Экспорт</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Debug Card -->
+          <div class="card collapsed" id="cardDebug">
+            <div class="card-header" onclick="UI.toggleCard('cardDebug')">
+              <h2>🐛 Лог</h2>
+              <span class="toggle">▼</span>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <button class="btn-ghost btn-sm" id="btnClearLog">🗑 Очистить</button>
+                <button class="btn-ghost btn-sm" id="btnCopyLog">📋 Копировать</button>
+              </div>
+              <textarea class="log" id="logArea" placeholder="Лог запросов..."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="map-container">
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modals -->
+  <div class="modal-overlay" id="modalMetrics">
+    <div class="modal">
+      <h3>📚 Справка по метрикам</h3>
+      <div class="help-content">
+        <p>Метрика определяет, как алгоритм выбирает "лучшую" точку встречи.</p>
+        
+        <div class="metric-card">
+          <h5>⏱ MiniMax — Минимизация максимального времени</h5>
+          <div class="formula">F(p) = max(T₁, T₂, ..., Tₙ)</div>
+          <p>Ищет точку, куда <strong>самый долгий путь минимален</strong>.</p>
+          <div class="when">✅ Когда важно встретиться быстрее</div>
+        </div>
+        
+        <div class="metric-card">
+          <h5>📏 Range — Минимизация разницы времён</h5>
+          <div class="formula">F(p) = max(T) − min(T)</div>
+          <p>Ищет точку, где <strong>разница между временами минимальна</strong>.</p>
+          <div class="when">✅ Когда важна максимальная "справедливость"</div>
+          <div class="warn">⚠️ Может дать точку, где все едут долго</div>
+        </div>
+        
+        <div class="metric-card">
+          <h5>🎯 Composite — Баланс</h5>
+          <div class="formula">F(p) = max(T) + 2·σ(T) + 0.5·range(T)</div>
+          <p>Комбинирует скорость и справедливость.</p>
+          <div class="when">✅ Рекомендуется для большинства случаев</div>
+        </div>
+        
+        <div class="metric-card">
+          <h5>🚇 NearMetro — Минимум пешей ходьбы</h5>
+          <div class="formula">F(p) = composite + Σ(walk_after_transport)</div>
+          <p><strong>Штрафует точки</strong>, до которых нужно долго идти пешком после выхода из транспорта.</p>
+          <p>Решает проблему: все приехали на одно метро и ещё 15 минут идут вместе до точки.</p>
+          <div class="when">✅ Когда хотите встретиться прямо у станции/остановки</div>
+        </div>
+        
+        <div class="metric-card">
+          <h5>📊 MaxDev — Минимум отклонения от среднего</h5>
+          <div class="formula">F(p) = max(|Tᵢ − T̄|)</div>
+          <p>Минимизирует максимальное отклонение времени от среднего.</p>
+          <div class="when">✅ Когда важно, чтобы никто не ехал намного дольше среднего</div>
+        </div>
+        
+        <div class="metric-card">
+          <h5>📈 Variance — Минимум дисперсии</h5>
+          <div class="formula">F(p) = Σ(Tᵢ − T̄)² / n</div>
+          <p>Минимизирует <strong>разброс времён</strong> вокруг среднего.</p>
+          <div class="when">✅ Когда важна статистическая однородность времён</div>
+          <div class="warn">⚠️ Менее чувствительна к выбросам чем MaxDev</div>
+        </div>
+        
+        <div class="metric-card">
+          <h5>🔬 ULTRA — Сравнение всех метрик</h5>
+          <p>Рассчитывает ВСЕ метрики и показывает сравнительную таблицу с координатами точек.</p>
+          <div class="when">✅ Для понимания разницы между метриками</div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-accent" onclick="UI.closeModal('modalMetrics')">Понятно</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-overlay" id="modalTimeHelp">
+    <div class="modal">
+      <h3>🕐 Время отправления / прибытия</h3>
+      <div class="help-content">
+        <p>Маршруты рассчитываются с учётом расписания транспорта!</p>
+        
+        <h4>🚀 Время отправления</h4>
+        <p>Все участники <strong>выезжают</strong> в указанное время. Время прибытия у всех будет разным.</p>
+        
+        <h4>🏁 Время прибытия</h4>
+        <p>Все участники должны <strong>приехать</strong> к указанному времени. Время выезда у всех будет разным.</p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-accent" onclick="UI.closeModal('modalTimeHelp')">Понятно</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-overlay" id="modalPricing">
+    <div class="modal">
+      <h3>💰 Тарифы Yandex Maps API</h3>
+      <div class="help-content">
+        <h4>🆓 Бесплатный тариф</h4>
+        <ul>
+          <li>До <strong>25 000 запросов/сутки</strong> — бесплатно</li>
+          <li>Без ограничения по сроку действия</li>
+          <li>Ограничения: только некоммерческое использование</li>
+        </ul>
+        
+        <h4>💳 Платные тарифы (при превышении или коммерческое использование)</h4>
+        <table>
+          <tr><th>Лимит/сутки</th><th>Цена/год</th><th>За 1 запрос</th><th>За 1000 запросов</th></tr>
+          <tr><td>1 000</td><td>195 000₽</td><td>~0.53₽</td><td>~534₽</td></tr>
+          <tr><td>10 000</td><td>585 000₽</td><td>~0.16₽</td><td>~160₽</td></tr>
+          <tr><td>25 000</td><td>1 105 000₽</td><td>~0.12₽</td><td>~121₽</td></tr>
+          <tr><td>100 000</td><td>2 184 000₽</td><td>~0.06₽</td><td>~60₽</td></tr>
+        </table>
+        
+        <h4>🧮 Примерная стоимость поиска в FMPF</h4>
+        <table>
+          <tr><th>Сетка</th><th>Участников</th><th>Запросов</th><th>Стоимость*</th></tr>
+          <tr><td>6×6</td><td>2</td><td>~74</td><td>бесплатно / ~12₽</td></tr>
+          <tr><td>6×6</td><td>3</td><td>~111</td><td>бесплатно / ~18₽</td></tr>
+          <tr><td>8×8</td><td>3</td><td>~195</td><td>бесплатно / ~31₽</td></tr>
+          <tr><td>10×10</td><td>4</td><td>~404</td><td>бесплатно / ~65₽</td></tr>
+        </table>
+        <p style="font-size:9px;color:var(--muted);">* бесплатно при лимите 25к/сутки, иначе по тарифу 10к запросов/сутки</p>
+        
+        <p style="margin-top:10px;"><a href="https://yandex.ru/dev/jsapi-v2-1/doc/ru/tariffs/" target="_blank">Полные тарифы на сайте Яндекса →</a></p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-accent" onclick="UI.closeModal('modalPricing')">Закрыть</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-overlay" id="modalGridHelp">
+    <div class="modal">
+      <h3>📐 Сетка N×N</h3>
+      <div class="help-content">
+        <p>Размер сетки определяет количество точек-кандидатов для поиска.</p>
+        <ul>
+          <li><strong>6×6</strong> = 36 точек — быстрый поиск, достаточен для большинства случаев</li>
+          <li><strong>8×8</strong> = 64 точки — более точный поиск</li>
+          <li><strong>10×10</strong> = 100 точек — детальный поиск, больше запросов</li>
+          <li><strong>12×12</strong> = 144 точки — максимальная детализация</li>
+        </ul>
+        <p>Чем больше сетка, тем больше запросов к API и дольше поиск.</p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-accent" onclick="UI.closeModal('modalGridHelp')">Понятно</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalExpandHelp">
+    <div class="modal">
+      <h3>↔️ Расширение области поиска</h3>
+      <div class="help-content">
+        <p>Расширяет область поиска за пределы точек участников.</p>
+        <ul>
+          <li><strong>H %</strong> — расширение по горизонтали (долгота, восток-запад)</li>
+          <li><strong>V %</strong> — расширение по вертикали (широта, север-юг)</li>
+        </ul>
+        <p><strong>Примеры:</strong></p>
+        <ul>
+          <li><strong>0%</strong> — область поиска точно между участниками</li>
+          <li><strong>20%</strong> — немного выходит за точки (рекомендуется)</li>
+          <li><strong>50%</strong> — значительное расширение для поиска в стороне</li>
+          <li><strong>100%</strong> — удвоенная область поиска</li>
+        </ul>
+        <p>Разные значения H и V полезны, если точки расположены вытянуто.</p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-accent" onclick="UI.closeModal('modalExpandHelp')">Понятно</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalTimeoutHelp">
+    <div class="modal">
+      <h3>⏱ Таймаут</h3>
+      <div class="help-content">
+        <p>Максимальное время ожидания ответа от API для одного маршрута.</p>
+        <ul>
+          <li><strong>15 сек</strong> — быстро, но может пропустить сложные маршруты</li>
+          <li><strong>25 сек</strong> — оптимально (рекомендуется)</li>
+          <li><strong>40-60 сек</strong> — для медленного интернета или сложных маршрутов</li>
+        </ul>
+        <p>Если много таймаутов в статистике — увеличьте значение.</p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-accent" onclick="UI.closeModal('modalTimeoutHelp')">Понятно</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalHelp">
+    <div class="modal">
+      <h3>❓ Справка</h3>
+      <div class="help-content">
+        <h4>🎯 Что делает приложение?</h4>
+        <p>Находит точку встречи, куда всем участникам ехать примерно одинаково по времени.</p>
+        
+        <h4>🚀 Как использовать?</h4>
+        <ol>
+          <li>Введите API ключ и нажмите "Подключить"</li>
+          <li>Добавьте точки: кликните по карте или введите адрес</li>
+          <li>Нажмите "Найти точку встречи"</li>
+          <li>На карте появятся ТОП-5 точек — кликните на любую для подробностей</li>
+          <li>Если нужно больше вариантов — нажмите "Показать ещё"</li>
+        </ol>
+        
+        <h4>📐 Визуализация сетки</h4>
+        <p>Нажмите кнопку <strong>📐</strong> рядом с настройками сетки, чтобы увидеть:</p>
+        <ul>
+          <li>Синий прямоугольник — область поиска</li>
+          <li>Серые точки — кандидаты на точку встречи</li>
+        </ul>
+        
+        <h4>🌡️ Тепловая карта</h4>
+        <p>Включите галочку "Показать тепловую карту" перед поиском, чтобы после увидеть:</p>
+        <ul>
+          <li><span style="color:#34d399;">🟢 Зелёные зоны</span> — лучшие точки (малое время)</li>
+          <li><span style="color:#fbbf24;">🟡 Жёлтые зоны</span> — средние точки</li>
+          <li><span style="color:#f87171;">🔴 Красные зоны</span> — плохие точки (долгое время)</li>
+        </ul>
+        
+        <h4>🚇 Метрика NearMetro</h4>
+        <p>Штрафует точки, где после выхода из транспорта нужно долго идти пешком. Решает проблему "все приехали на одно метро и ещё идут 15 минут вместе".</p>
+        
+        <h4>📊 Живая статистика</h4>
+        <p>Во время поиска отображается: сколько запросов отправлено, успешно, с ошибками.</p>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-accent" onclick="UI.closeModal('modalHelp')">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    'use strict';
+    
+    const COLORS = ['#3b82f6','#10b981','#f59e0b','#ef4444','#8b5cf6','#ec4899','#06b6d4','#84cc16'];
+    const RESULT_COLORS = ['#fbbf24', '#94a3b8', '#d97706', '#6b7280', '#6b7280'];
+    const METRIC_NAMES = { minimax: 'MiniMax', range: 'Range', composite: 'Composite', maxdev: 'MaxDev', variance: 'Variance', nearmetro: 'NearMetro' };
+    
+    const State = {
+      apiLoaded: false, map: null, points: [], 
+      allResults: [],
+      results: [],
+      resultMarkers: [],
+      selectedResultIndex: 0,
+      routeObjects: [],
+      gridPreviewObjects: [],
+      heatmapObjects: [],
+      showingGrid: false,
+      runId: 0, running: false, cancelled: false, theme: 'dark',
+      timeMode: 'departure',
+      displayCount: 5,
+      currentSearch: {
+        sent: 0, ok: 0, fail: 0, expected: 0
+      },
+      stats: { 
+        geocode: { total: 0, ok: 0, fail: 0 }, 
+        route: { total: 0, ok: 0, fail: 0, timeout: 0 } 
+      },
+      history: [],
+      ultraResults: null
+    };
+    
+    const $ = id => document.getElementById(id);
+    const DOM = {};
+    
+    const Utils = {
+      uuid: () => crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+      now: () => new Date().toLocaleTimeString('ru-RU', { hour12: false }) + '.' + String(Date.now() % 1000).padStart(3, '0'),
+      fmtCoord: c => `${c[0].toFixed(5)}, ${c[1].toFixed(5)}`,
+      fmtCoordShort: c => `${c[0].toFixed(4)}, ${c[1].toFixed(4)}`,
+      secToStr: s => { s = Math.max(0, Math.round(s)); const h = Math.floor(s/3600), m = Math.floor((s%3600)/60); return h > 0 ? `${h}ч ${m}м` : `${m} мин`; },
+      secToStrShort: s => { s = Math.max(0, Math.round(s)); const m = Math.floor(s/60); return `${m}м`; },
+      clamp: (v, min, max, def) => { const n = parseInt(v, 10); return Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : def; },
+      escHtml: s => { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; },
+      copyToClipboard: async text => { try { await navigator.clipboard.writeText(text); return true; } catch { return false; } },
+      // Интерполяция цвета от зелёного к красному
+      scoreToColor: (score, minScore, maxScore) => {
+        const t = Math.min(1, Math.max(0, (score - minScore) / (maxScore - minScore || 1)));
+        const r = Math.round(52 + t * (248 - 52));
+        const g = Math.round(211 - t * (211 - 113));
+        const b = Math.round(153 - t * (153 - 113));
+        return `rgba(${r},${g},${b},0.5)`;
+      }
+    };
+    
+    const Math2 = {
+      mean: arr => arr.reduce((a,b)=>a+b,0)/arr.length,
+      variance: arr => { const m = Math2.mean(arr); return arr.reduce((a,v)=>a+(v-m)**2,0)/arr.length; },
+      std: arr => Math.sqrt(Math2.variance(arr)),
+      range: arr => Math.max(...arr) - Math.min(...arr),
+      maxDev: arr => { const m = Math2.mean(arr); return Math.max(...arr.map(v=>Math.abs(v-m))); },
+      
+      calcMetrics: durations => {
+        const n = durations.length, sum = durations.reduce((a,b)=>a+b,0), mean = sum/n;
+        const min = Math.min(...durations), max = Math.max(...durations), range = max - min;
+        const variance = durations.reduce((a,v)=>a+(v-mean)**2,0)/n, std = Math.sqrt(variance);
+        const maxDev = Math.max(...durations.map(v=>Math.abs(v-mean)));
+        return { mean, min, max, range, variance, std, maxDev, sum };
+      },
+      
+      // Рассчитать суммарное время пешей ходьбы ПОСЛЕ последнего транспорта
+      calcWalkAfterTransport: routes => {
+        let totalWalk = 0;
+        let maxWalk = 0;
+        
+        routes.forEach(r => {
+          // Находим последний сегмент транспорта (не пешком)
+          let lastTransportIdx = -1;
+          r.segments.forEach((s, i) => {
+            if (s.type !== 'walk' && s.type !== 'transfer') {
+              lastTransportIdx = i;
+            }
+          });
+          
+          // Суммируем пешую ходьбу после последнего транспорта
+          let walkAfter = 0;
+          if (lastTransportIdx >= 0) {
+            for (let i = lastTransportIdx + 1; i < r.segments.length; i++) {
+              if (r.segments[i].type === 'walk') {
+                walkAfter += r.segments[i].duration;
+              }
+            }
+          }
+          
+          r.walkAfterTransport = walkAfter;
+          totalWalk += walkAfter;
+          maxWalk = Math.max(maxWalk, walkAfter);
+        });
+        
+        return { totalWalk, maxWalk };
+      },
+      
+      centroid: points => {
+        const n = points.length;
+        return [points.reduce((a,p)=>a+p.coords[0],0)/n, points.reduce((a,p)=>a+p.coords[1],0)/n];
+      },
+      
+      bbox: (points, expandH = 0, expandV = 0) => {
+        const lats = points.map(p=>p.coords[0]), lons = points.map(p=>p.coords[1]);
+        let minLat = Math.min(...lats), maxLat = Math.max(...lats), minLon = Math.min(...lons), maxLon = Math.max(...lons);
+        const padLat = (maxLat-minLat)*expandV/100 || 0.01, padLon = (maxLon-minLon)*expandH/100 || 0.015;
+        return { minLat: minLat-padLat, maxLat: maxLat+padLat, minLon: minLon-padLon, maxLon: maxLon+padLon };
+      },
+      
+      generateGrid: (points, gridSize, expandH, expandV) => {
+        const bbox = Math2.bbox(points, expandH, expandV), centroid = Math2.centroid(points);
+        const candidates = [centroid];
+        for (let i = 0; i < gridSize; i++) {
+          for (let j = 0; j < gridSize; j++) {
+            const lat = bbox.minLat + ((i+0.5)/gridSize)*(bbox.maxLat-bbox.minLat);
+            const lon = bbox.minLon + ((j+0.5)/gridSize)*(bbox.maxLon-bbox.minLon);
+            candidates.push([lat, lon]);
+          }
+        }
+        return candidates;
+      },
+      
+      estimateRequests: (points, gridSize) => (gridSize * gridSize + 1) * points.length
+    };
+    
+    const Log = {
+      append: (msg, data) => {
+        const text = `[${Utils.now()}] ${msg}` + (data !== undefined ? '\n' + JSON.stringify(data, null, 2) : '');
+        console.log('%c' + msg, 'color:#4d9fff;font-weight:bold', data ?? '');
+        if (DOM.logArea) { DOM.logArea.value += (DOM.logArea.value ? '\n\n' : '') + text; DOM.logArea.scrollTop = DOM.logArea.scrollHeight; }
+        State.history.push({ time: new Date().toISOString(), msg, data });
+      },
+      clear: () => { if (DOM.logArea) DOM.logArea.value = ''; Log.append('Лог очищен'); }
+    };
+    
+    const UI = {
+      toggleCard: id => $(id)?.classList.toggle('collapsed'),
+      openModal: id => $(id)?.classList.add('show'),
+      closeModal: id => $(id)?.classList.remove('show'),
+      
+      setTheme: theme => {
+        State.theme = theme;
+        document.documentElement.setAttribute('data-theme', theme);
+        if (DOM.themeBtn) DOM.themeBtn.textContent = theme === 'dark' ? '☀️' : '🌙';
+        try { localStorage.setItem('fmp_theme', theme); } catch {}
+      },
+      
+      toggleTheme: () => UI.setTheme(State.theme === 'dark' ? 'light' : 'dark'),
+      
+      setTimeMode: mode => {
+        State.timeMode = mode;
+        if (DOM.btnTimeDeparture) DOM.btnTimeDeparture.classList.toggle('active', mode === 'departure');
+        if (DOM.btnTimeArrival) DOM.btnTimeArrival.classList.toggle('active', mode === 'arrival');
+      },
+      
+      setApiStatus: (type, text) => {
+        if (DOM.apiStatus) { DOM.apiStatus.className = 'status ' + type; DOM.apiStatus.innerHTML = text; }
+        if (DOM.apiBadge) {
+          DOM.apiBadge.textContent = type === 'ok' ? 'online' : (type === 'bad' ? 'error' : 'offline');
+          DOM.apiBadge.style.background = type === 'ok' ? 'var(--ok-soft)' : (type === 'bad' ? 'var(--bad-soft)' : 'var(--warn-soft)');
+          DOM.apiBadge.style.borderColor = type === 'ok' ? 'var(--ok-border)' : (type === 'bad' ? 'var(--bad-border)' : 'var(--warn-border)');
+          DOM.apiBadge.style.color = type === 'ok' ? 'var(--ok)' : (type === 'bad' ? 'var(--bad)' : 'var(--warn)');
+        }
+      },
+      
+      setFindStatus: (type, text) => { if (DOM.findStatus) { DOM.findStatus.className = 'status ' + type; DOM.findStatus.innerHTML = text; } },
+      
+      setProgress: (phase, current, total) => {
+        if (!DOM.progressContainer) return;
+        if (total <= 0) { DOM.progressContainer.style.display = 'none'; return; }
+        DOM.progressContainer.style.display = 'block';
+        const pct = Math.round((current/total)*100);
+        DOM.progressFill.style.width = pct + '%';
+        DOM.progressPhase.textContent = phase;
+        DOM.progressPct.textContent = pct + '%';
+      },
+      
+      updateLiveStats: () => {
+        const s = State.currentSearch;
+        if ($('statSent')) $('statSent').textContent = s.sent;
+        if ($('statOk')) $('statOk').textContent = s.ok;
+        if ($('statFail')) $('statFail').textContent = s.fail;
+        if ($('statTotal')) $('statTotal').textContent = s.sent;
+        if ($('statExpected')) $('statExpected').textContent = s.expected;
+      },
+      
+      showLiveStats: show => {
+        if ($('liveStats')) $('liveStats').style.display = show ? 'flex' : 'none';
+      },
+      
+      updateStats: () => {
+        const g = State.stats.geocode, r = State.stats.route;
+        const totalRequests = g.total + r.total;
+        if (DOM.chipTotal) DOM.chipTotal.textContent = totalRequests;
+        if (DOM.chipOk) DOM.chipOk.textContent = g.ok + r.ok;
+        if (DOM.chipFail) DOM.chipFail.textContent = g.fail + r.fail + r.timeout;
+        if ($('chipGeo')) $('chipGeo').textContent = g.total;
+        if ($('chipRoute')) $('chipRoute').textContent = r.total;
+        if ($('chipTimeout')) $('chipTimeout').textContent = r.timeout;
+        try { localStorage.setItem('fmp_stats', JSON.stringify(State.stats)); } catch {}
+      },
+      
+      updatePointsList: () => {
+        if (DOM.pointsBadge) DOM.pointsBadge.textContent = State.points.length;
+        
+        if (State.points.length === 0) {
+          if (DOM.pointsList) DOM.pointsList.innerHTML = '<div class="empty-state">Кликните по карте или введите адрес</div>';
+          return;
+        }
+        
+        if (DOM.pointsList) {
+          DOM.pointsList.innerHTML = State.points.map(p => `
+            <div class="point-item" data-id="${p.id}">
+              <div class="point-dot" style="background:${p.color}"></div>
+              <div class="point-info">
+                <div class="point-name">
+                  <input type="text" value="${Utils.escHtml(p.name)}" data-id="${p.id}" class="point-name-input">
+                  <span class="point-transport ${p.transport}">${p.transport === 'auto' ? '🚗' : '🚇'}</span>
+                </div>
+                <div class="point-coords">${Utils.fmtCoord(p.coords)}</div>
+              </div>
+              <div class="point-actions">
+                <button class="btn-ghost btn-sm" onclick="App.toggleTransport('${p.id}')" title="Сменить транспорт">🔄</button>
+                <button class="btn-bad btn-sm" onclick="App.removePoint('${p.id}')">✕</button>
+              </div>
+            </div>
+          `).join('');
+          
+          DOM.pointsList.querySelectorAll('.point-name-input').forEach(inp => {
+            inp.addEventListener('change', e => App.renamePoint(e.target.dataset.id, e.target.value));
+          });
+        }
+        
+        UI.updateEstimates();
+        UI.updateFindButton();
+      },
+      
+      updateEstimates: () => {
+        if (State.points.length < 2) {
+          if (DOM.estRequests) DOM.estRequests.textContent = '—';
+          if (DOM.estCost) DOM.estCost.textContent = '—';
+          return;
+        }
+        const gridSize = Utils.clamp(DOM.gridSize?.value, 3, 12, 6);
+        const est = Math2.estimateRequests(State.points, gridSize);
+        if (DOM.estRequests) DOM.estRequests.textContent = `~${est}`;
+        if (DOM.estCost) {
+          const costPaid = (est * 0.16).toFixed(0);
+          DOM.estCost.textContent = `бесплатно / ~${costPaid}₽`;
+        }
+        
+        // Обновляем превью сетки если включено
+        if (State.showingGrid) App.showGridPreview();
+      },
+      
+      updateFindButton: () => {
+        const canFind = State.apiLoaded && State.points.length >= 2 && !State.running;
+        if (DOM.btnFind) DOM.btnFind.disabled = !canFind;
+        
+        if (State.points.length >= 2 && !State.running && State.results.length === 0) {
+          UI.setFindStatus('info', '✅ Готово. Нажмите "Найти точку встречи"');
+        } else if (State.points.length < 2) {
+          UI.setFindStatus('info', `Добавьте ещё ${2 - State.points.length} участник${State.points.length === 1 ? 'а' : 'ов'}`);
+        }
+      },
+      
+      showResults: (results, selectedIndex = 0) => {
+        State.results = results;
+        State.selectedResultIndex = selectedIndex;
+        
+        if (results.length === 0) return;
+        
+        App.showAllResultMarkers(results);
+        UI.showSelectedResult(selectedIndex);
+      },
+      
+      showSelectedResult: (index) => {
+        if (index < 0 || index >= State.results.length) return;
+        State.selectedResultIndex = index;
+        
+        const result = State.results[index];
+        if (DOM.resultsBadge) DOM.resultsBadge.textContent = Utils.secToStr(result.mean);
+        
+        State.resultMarkers.forEach((m, i) => {
+          if (m && m.options) {
+            try { m.options.set('preset', i === index ? 'islands#redStarIcon' : 'islands#grayCircleDotIcon'); } catch {}
+          }
+        });
+        
+        const coordsStr = Utils.fmtCoord(result.coords);
+        const timesHtml = result.routes.map(r => {
+          const walkExtra = r.walkAfterTransport > 60 ? `<span class="walk-extra">+${Utils.secToStrShort(r.walkAfterTransport)} 🚶</span>` : '';
+          return `
+            <div class="route-time-item">
+              <div class="dot" style="background:${r.color}"></div>
+              <div class="name">${Utils.escHtml(r.name)}</div>
+              <div class="time">${Utils.secToStr(r.duration)} ${walkExtra}</div>
+            </div>
+          `;
+        }).join('');
+        
+        const metricTag = result.metricName ? `<span class="metric-tag">${METRIC_NAMES[result.metricName] || result.metricName}</span>` : '';
+        const walkTag = result.maxWalk < 180 ? '<span class="walk-tag">🚇 У транспорта</span>' : '';
+        
+        const hasMore = State.allResults.length > State.displayCount;
+        
+        if (DOM.resultsContent) {
+          DOM.resultsContent.innerHTML = `
+            <div class="result-summary">
+              <h3>⭐ #${index + 1} Точка встречи ${metricTag} ${walkTag}</h3>
+              <div class="coords-row">
+                <code>${coordsStr}</code>
+                <button class="copy-btn btn-ghost" onclick="App.copyCoords('${coordsStr}')">📋</button>
+              </div>
+              <div class="result-metrics">
+                <div class="metric-box"><div class="val">${Utils.secToStr(result.mean)}</div><div class="label">Среднее</div></div>
+                <div class="metric-box"><div class="val">${Utils.secToStr(result.range)}</div><div class="label">Разница</div></div>
+                <div class="metric-box"><div class="val">${Utils.secToStr(result.min)}</div><div class="label">Мин</div></div>
+                <div class="metric-box"><div class="val">${Utils.secToStr(result.max)}</div><div class="label">Макс</div></div>
+              </div>
+              <div class="route-times">${timesHtml}</div>
+            </div>
+            <div style="font-size:10px;font-weight:600;margin:8px 0 4px;color:var(--muted);">🏆 ТОП-${State.displayCount} из ${State.allResults.length} точек:</div>
+            <div class="top-results">
+              ${State.results.map((r, i) => {
+                const rankClass = i === 0 ? 'gold' : (i === 1 ? 'silver' : (i === 2 ? 'bronze' : ''));
+                const activeClass = i === index ? 'active' : '';
+                const times = r.routes.map(rt => Utils.secToStr(rt.duration)).join(' / ');
+                const mTag = r.metricName ? `<span class="metric-tag">${METRIC_NAMES[r.metricName] || ''}</span>` : '';
+                const wTag = r.maxWalk < 180 ? '<span class="walk-tag">🚇</span>' : '';
+                return `
+                  <div class="top-result-item ${activeClass}" onclick="App.selectResult(${i})">
+                    <div class="rank ${rankClass}">#${i + 1}</div>
+                    <div class="info">
+                      <div>Среднее: <strong>${Utils.secToStr(r.mean)}</strong>, разница: ${Utils.secToStr(r.range)} ${mTag} ${wTag}</div>
+                      <div class="times">${times}</div>
+                    </div>
+                    <div class="score">${r.score.toFixed(0)}</div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+            ${hasMore ? `<button class="btn-ghost load-more-btn" onclick="App.loadMore()">📋 Показать ещё ${Math.min(5, State.allResults.length - State.displayCount)} из ${State.allResults.length - State.displayCount}</button>` : ''}
+          `;
+        }
+        
+        UI.showRoutes(result.routes);
+      },
+      
+      showUltraResults: ultraResults => {
+        State.ultraResults = ultraResults;
+        const container = $('ultraCompareContainer');
+        if (!container) return;
+        
+        container.style.display = 'block';
+        
+        const metrics = ['minimax', 'range', 'composite', 'nearmetro', 'maxdev', 'variance'];
+        
+        let html = `
+          <div style="font-size:10px;font-weight:600;margin:8px 0 4px;color:var(--muted);">🔬 ULTRA: Лучшая точка по каждой метрике</div>
+          <table class="ultra-table">
+            <thead><tr><th>Метрика</th><th>Координаты</th><th>Среднее</th><th>Max</th><th>Разница</th><th>Времена</th></tr></thead>
+            <tbody>
+        `;
+        
+        const bestMean = Math.min(...metrics.map(m => ultraResults[m]?.mean || Infinity));
+        const bestMax = Math.min(...metrics.map(m => ultraResults[m]?.max || Infinity));
+        const bestRange = Math.min(...metrics.map(m => ultraResults[m]?.range || Infinity));
+        
+        for (const m of metrics) {
+          const r = ultraResults[m];
+          if (!r) continue;
+          const isBest = r.mean === bestMean || r.max === bestMax || r.range === bestRange;
+          const times = r.routes.map(rt => Utils.secToStrShort(rt.duration)).join(', ');
+          html += `
+            <tr class="${isBest ? 'best' : ''}">
+              <td><strong>${METRIC_NAMES[m]}</strong></td>
+              <td class="coords-cell">${Utils.fmtCoordShort(r.coords)}</td>
+              <td class="num ${r.mean === bestMean ? 'winner' : ''}">${Utils.secToStr(r.mean)}</td>
+              <td class="num ${r.max === bestMax ? 'winner' : ''}">${Utils.secToStr(r.max)}</td>
+              <td class="num ${r.range === bestRange ? 'winner' : ''}">${Utils.secToStr(r.range)}</td>
+              <td style="font-size:8px;">${times}</td>
+            </tr>
+          `;
+        }
+        
+        html += '</tbody></table>';
+        container.innerHTML = html;
+      },
+      
+      showRoutes: routes => {
+        if (!DOM.routesPanel) return;
+        DOM.routesPanel.style.display = 'block';
+        DOM.routesPanel.innerHTML = routes.map(r => {
+          const icons = {walk:'🚶',bus:'🚌',trolleybus:'🚎',tram:'🚊',metro:'🚇',suburban:'🚆',transfer:'🔄',auto:'🚗'};
+          const segsHtml = r.segments.map(s => 
+            `<span class="segment ${s.type}"><span>${icons[s.type]||'•'}</span> ${Utils.escHtml(s.name.split('\n')[0].slice(0,18))}</span>`
+          ).join('');
+          
+          const walkExtra = r.walkAfterTransport > 60 ? `<span style="color:var(--warn);font-size:9px;margin-left:4px;">+${Utils.secToStrShort(r.walkAfterTransport)} 🚶</span>` : '';
+          
+          return `
+            <div class="route-card">
+              <div class="route-header">
+                <div class="name"><span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:${r.color}"></span> ${Utils.escHtml(r.name)}</div>
+                <div class="time">${Utils.secToStr(r.duration)} ${walkExtra}</div>
+              </div>
+              <div class="route-segments">${segsHtml || '<span style="color:var(--muted);font-size:8px;">Нет деталей</span>'}</div>
+            </div>
+          `;
+        }).join('');
+      },
+      
+      enableControls: enabled => {
+        const els = ['inputAddr','inputName','inputTransport','btnAddPoint','btnMyLocation','btnClearPoints','btnFitAll','selMetric','gridSize','gridExpandH','gridExpandV','timeout','departureTime','btnNow','btnTimeUp','btnTimeDown','btnTimeDeparture','btnTimeArrival','btnShowGrid','chkHeatmap'];
+        els.forEach(id => { if (DOM[id]) DOM[id].disabled = !enabled; });
+        UI.updateFindButton();
+      }
+    };
+    
+    const API = {
+      loadYandex: key => {
+        if (!key?.trim()) { UI.setApiStatus('bad', '❌ Введите API ключ'); return; }
+        if (window.ymaps) { UI.setApiStatus('warn', '⚠️ API уже загружен'); return; }
+        
+        try { localStorage.setItem('fmp_apikey', key); } catch {}
+        UI.setApiStatus('warn', '⏳ Загрузка API...');
+        Log.append('Загрузка Yandex Maps JS API');
+        
+        const script = document.createElement('script');
+        script.src = `https://api-maps.yandex.ru/2.1/?apikey=${encodeURIComponent(key)}&lang=ru_RU`;
+        script.async = true;
+        
+        script.onload = () => {
+          if (!window.ymaps) { UI.setApiStatus('bad', '❌ ymaps недоступен'); return; }
+          ymaps.ready(() => {
+            State.apiLoaded = true;
+            UI.setApiStatus('ok', '✅ API готов');
+            Log.append('ymaps.ready()');
+            API.initMap();
+            UI.enableControls(true);
+            
+            setTimeout(() => {
+              try {
+                const saved = localStorage.getItem('fmp_points');
+                if (saved) JSON.parse(saved).forEach(p => App.addPoint(p.coords, p, true));
+              } catch {}
+            }, 300);
+          });
+        };
+        
+        script.onerror = () => { UI.setApiStatus('bad', '❌ Ошибка загрузки'); };
+        document.head.appendChild(script);
+      },
+      
+      initMap: () => {
+        State.map = new ymaps.Map('map', {
+          center: [55.751244, 37.618423], zoom: 11,
+          controls: ['zoomControl', 'typeSelector', 'fullscreenControl', 'rulerControl']
+        }, { suppressMapOpenBlock: true });
+        
+        State.map.events.add('click', e => {
+          if (!State.apiLoaded) return;
+          if (State.results.length > 0) {
+            if (!confirm('Добавление новой точки сбросит результаты. Продолжить?')) return;
+          }
+          const coords = e.get('coords');
+          const name = DOM.inputName?.value.trim() || `Точка ${State.points.length + 1}`;
+          const transport = DOM.inputTransport?.value || 'masstransit';
+          App.addPoint(coords, { name, transport });
+          if (DOM.inputName) DOM.inputName.value = '';
+        });
+        
+        Log.append('Карта инициализирована');
+      },
+      
+      geocode: async query => {
+        State.stats.geocode.total++;
+        State.currentSearch.sent++;
+        UI.updateStats();
+        UI.updateLiveStats();
+        
+        try {
+          const res = await ymaps.geocode(query);
+          const first = res.geoObjects.get(0);
+          if (!first) { 
+            State.stats.geocode.fail++; 
+            State.currentSearch.fail++;
+            UI.updateStats(); 
+            UI.updateLiveStats();
+            return { ok: false, error: 'Не найдено' }; 
+          }
+          
+          const coords = first.geometry.getCoordinates();
+          const address = first.getAddressLine?.() || first.properties.get('text');
+          State.stats.geocode.ok++;
+          State.currentSearch.ok++;
+          UI.updateStats();
+          UI.updateLiveStats();
+          return { ok: true, coords, address };
+        } catch (e) {
+          State.stats.geocode.fail++;
+          State.currentSearch.fail++;
+          UI.updateStats();
+          UI.updateLiveStats();
+          return { ok: false, error: String(e) };
+        }
+      },
+      
+      calcRoute: (from, to, transport, timeoutMs, runId) => {
+        State.stats.route.total++;
+        State.currentSearch.sent++;
+        UI.updateStats();
+        UI.updateLiveStats();
+        
+        return new Promise(resolve => {
+          let done = false;
+          const routingMode = transport === 'auto' ? 'auto' : 'masstransit';
+          
+          const mr = new ymaps.multiRouter.MultiRoute({
+            referencePoints: [from, to],
+            params: { routingMode }
+          }, { boundsAutoApply: false });
+          
+          const model = mr.model;
+          
+          const finish = result => {
+            if (done) return;
+            done = true;
+            try { model.events.remove('requestsuccess', onSuccess); model.events.remove('requestfail', onFail); } catch {}
+            resolve(result);
+          };
+          
+          const onSuccess = () => {
+            if (runId !== State.runId || State.cancelled) { finish({ ok: false, error: 'cancelled' }); return; }
+            
+            const active = mr.getActiveRoute();
+            if (!active) { 
+              State.stats.route.fail++; 
+              State.currentSearch.fail++;
+              UI.updateStats(); 
+              UI.updateLiveStats();
+              finish({ ok: false, error: 'no_active_route' }); 
+              return; 
+            }
+            
+            const duration = active.properties.get('duration');
+            if (!duration?.value) { 
+              State.stats.route.fail++; 
+              State.currentSearch.fail++;
+              UI.updateStats(); 
+              UI.updateLiveStats();
+              finish({ ok: false, error: 'no_duration' }); 
+              return; 
+            }
+            
+            const segments = [];
+            try {
+              active.getPaths().each(path => {
+                path.getSegments().each(seg => {
+                  const props = seg.properties.getAll();
+                  const dur = props.duration?.value;
+                  if (!dur || dur < 30) return;
+                  
+                  let type = 'walk', name = props.text || '';
+                  if (props.type === 'masstransit') {
+                    const t = props.transports?.[0];
+                    if (t) {
+                      name = t.name || t.title || name;
+                      const tt = t.type;
+                      if (tt === 'bus' || tt === 'minibus') type = 'bus';
+                      else if (tt === 'trolleybus') type = 'trolleybus';
+                      else if (tt === 'tram') type = 'tram';
+                      else if (tt === 'underground' || tt === 'metro') type = 'metro';
+                      else if (tt === 'suburban') type = 'suburban';
+                      else type = 'bus';
+                    }
+                  } else if (props.type === 'transfer') { type = 'transfer'; name = 'Пересадка'; }
+                  else if (routingMode === 'auto') { type = 'auto'; name = 'На авто'; }
+                  
+                  segments.push({ type, name, duration: dur });
+                });
+              });
+            } catch {}
+            
+            State.stats.route.ok++;
+            State.currentSearch.ok++;
+            UI.updateStats();
+            UI.updateLiveStats();
+            
+            finish({ ok: true, durationSec: duration.value, durationText: duration.text, segments, multiRoute: mr });
+          };
+          
+          const onFail = e => {
+            State.stats.route.fail++;
+            State.currentSearch.fail++;
+            UI.updateStats();
+            UI.updateLiveStats();
+            finish({ ok: false, error: String(e?.get?.('error')) });
+          };
+          
+          model.events.add('requestsuccess', onSuccess);
+          model.events.add('requestfail', onFail);
+          
+          setTimeout(() => {
+            if (done) return;
+            State.stats.route.timeout++;
+            State.currentSearch.fail++;
+            UI.updateStats();
+            UI.updateLiveStats();
+            finish({ ok: false, error: 'timeout' });
+          }, timeoutMs);
+        });
+      }
+    };
+    
+    const Algorithm = {
+      find: async () => {
+        if (!State.apiLoaded || State.points.length < 2) return;
+        
+        State.running = true;
+        State.cancelled = false;
+        const runId = ++State.runId;
+        
+        const metricName = DOM.selMetric?.value || 'minimax';
+        const isUltra = metricName === 'ultra';
+        const gridSize = Utils.clamp(DOM.gridSize?.value, 3, 12, 6);
+        const expandH = Utils.clamp(DOM.gridExpandH?.value, 0, 100, 20);
+        const expandV = Utils.clamp(DOM.gridExpandV?.value, 0, 100, 20);
+        const timeoutMs = Utils.clamp(DOM.timeout?.value, 5, 60, 25) * 1000;
+        const showHeatmap = $('chkHeatmap')?.checked || false;
+        
+        const totalRoutes = Math2.estimateRequests(State.points, gridSize);
+        
+        State.currentSearch = { sent: 0, ok: 0, fail: 0, expected: totalRoutes };
+        State.displayCount = 5;
+        UI.showLiveStats(true);
+        UI.updateLiveStats();
+        
+        Log.append('Поиск: старт', { metric: metricName, candidates: gridSize * gridSize, timeMode: State.timeMode, expected: totalRoutes });
+        
+        if (DOM.btnFind) DOM.btnFind.disabled = true;
+        if (DOM.btnCancel) DOM.btnCancel.disabled = false;
+        App.clearResult();
+        App.hideGridPreview();
+        
+        const origins = State.points.map(p => p.coords);
+        const transports = State.points.map(p => p.transport);
+        const candidates = Math2.generateGrid(State.points, gridSize, expandH, expandV);
+        
+        const allResults = [];
+        let processed = 0;
+        
+        for (let ci = 0; ci < candidates.length; ci++) {
+          if (runId !== State.runId || State.cancelled) break;
+          
+          const cand = candidates[ci];
+          const durations = [];
+          const routes = [];
+          let valid = true;
+          
+          for (let i = 0; i < origins.length; i++) {
+            if (runId !== State.runId || State.cancelled) { valid = false; break; }
+            
+            const r = await API.calcRoute(origins[i], cand, transports[i], timeoutMs, runId);
+            processed++;
+            UI.setProgress(`Кандидат ${ci+1}/${candidates.length}`, processed, totalRoutes);
+            
+            if (!r.ok) { valid = false; break; }
+            
+            durations.push(r.durationSec);
+            routes.push({
+              pointId: State.points[i].id,
+              name: State.points[i].name,
+              color: State.points[i].color,
+              transport: transports[i],
+              duration: r.durationSec,
+              durationText: r.durationText,
+              segments: r.segments
+            });
+          }
+          
+          if (!valid) continue;
+          
+          const metrics = Math2.calcMetrics(durations);
+          const walkInfo = Math2.calcWalkAfterTransport(routes);
+          
+          allResults.push({
+            coords: cand,
+            durations,
+            routes,
+            ...metrics,
+            ...walkInfo,
+            scores: {
+              minimax: metrics.max,
+              range: metrics.range,
+              composite: metrics.max + metrics.std * 2 + metrics.range * 0.5,
+              nearmetro: metrics.max + metrics.std * 2 + metrics.range * 0.5 + walkInfo.totalWalk * 0.5 + walkInfo.maxWalk * 2,
+              maxdev: metrics.maxDev,
+              variance: metrics.variance
+            }
+          });
+          
+          UI.setFindStatus('warn', `🔍 Обработано ${ci+1}/${candidates.length}, найдено ${allResults.length} точек`);
+        }
+        
+        Algorithm.finish(allResults, metricName, isUltra, runId, showHeatmap);
+      },
+      
+      finish: (allResults, metricName, isUltra, runId, showHeatmap) => {
+        State.running = false;
+        if (DOM.btnFind) DOM.btnFind.disabled = false;
+        if (DOM.btnCancel) DOM.btnCancel.disabled = true;
+        UI.setProgress('', 0, 0);
+        
+        if (State.cancelled) {
+          UI.setFindStatus('warn', '⛔ Поиск отменён');
+          UI.showLiveStats(false);
+          UI.updateFindButton();
+          return;
+        }
+        
+        if (allResults.length === 0) {
+          UI.setFindStatus('bad', '❌ Не удалось найти точку');
+          UI.showLiveStats(false);
+          UI.updateFindButton();
+          return;
+        }
+        
+        const sortMetric = isUltra ? 'composite' : metricName;
+        const sorted = [...allResults].sort((a, b) => a.scores[sortMetric] - b.scores[sortMetric]);
+        
+        sorted.forEach(r => { r.score = r.scores[sortMetric]; r.metricName = sortMetric; });
+        
+        State.allResults = sorted;
+        
+        // Показываем тепловую карту если включено
+        if (showHeatmap && allResults.length > 1) {
+          App.showHeatmap(allResults, sortMetric);
+        }
+        
+        UI.showResults(sorted.slice(0, State.displayCount));
+        
+        if (isUltra) {
+          const ultraResults = {};
+          const metrics = ['minimax', 'range', 'composite', 'nearmetro', 'maxdev', 'variance'];
+          for (const m of metrics) {
+            const sortedByM = [...allResults].sort((a, b) => a.scores[m] - b.scores[m]);
+            if (sortedByM.length > 0) {
+              const best = { ...sortedByM[0] };
+              best.metricName = m;
+              ultraResults[m] = best;
+            }
+          }
+          UI.showUltraResults(ultraResults);
+        }
+        
+        const s = State.currentSearch;
+        UI.setFindStatus('ok', `✅ Найдено ${allResults.length} точек. Запросов: ${s.sent} (✓${s.ok} ✗${s.fail})`);
+        
+        Log.append('Поиск: завершён', { totalFound: allResults.length, requests: s });
+      },
+      
+      cancel: () => { State.cancelled = true; UI.setFindStatus('warn', '⛔ Отмена...'); }
+    };
+    
+    const App = {
+      addPoint: (coords, meta = {}, silent = false) => {
+        if (!State.map) return;
+        if (!silent && State.results.length > 0) App.clearResult();
+        
+        const id = Utils.uuid();
+        const name = meta.name || `Точка ${State.points.length + 1}`;
+        const transport = meta.transport || 'masstransit';
+        const color = COLORS[State.points.length % COLORS.length];
+        
+        const marker = new ymaps.Placemark(coords, {
+          iconCaption: name,
+          balloonContent: `<strong>${Utils.escHtml(name)}</strong><br><code>${Utils.fmtCoord(coords)}</code>`
+        }, { preset: 'islands#circleIcon', iconColor: color });
+        
+        State.map.geoObjects.add(marker);
+        State.points.push({ id, name, coords, address: meta.address, transport, color, marker });
+        
+        UI.updatePointsList();
+        App.savePoints();
+        
+        if (!silent) Log.append('Точка добавлена', { coords, name });
+      },
+      
+      removePoint: id => {
+        const idx = State.points.findIndex(p => p.id === id);
+        if (idx < 0) return;
+        
+        const p = State.points[idx];
+        State.map.geoObjects.remove(p.marker);
+        State.points.splice(idx, 1);
+        
+        UI.updatePointsList();
+        App.savePoints();
+      },
+      
+      renamePoint: (id, name) => {
+        const p = State.points.find(p => p.id === id);
+        if (!p) return;
+        p.name = name || 'Точка';
+        p.marker.properties.set('iconCaption', p.name);
+        App.savePoints();
+      },
+      
+      toggleTransport: id => {
+        const p = State.points.find(p => p.id === id);
+        if (!p) return;
+        p.transport = p.transport === 'auto' ? 'masstransit' : 'auto';
+        if (State.results.length > 0) App.clearResult();
+        UI.updatePointsList();
+        App.savePoints();
+      },
+      
+      clearPoints: () => {
+        State.points.forEach(p => State.map.geoObjects.remove(p.marker));
+        State.points = [];
+        App.clearResult();
+        App.hideGridPreview();
+        UI.updatePointsList();
+        App.savePoints();
+      },
+      
+      clearResult: () => {
+        State.resultMarkers.forEach(m => { if (m) State.map.geoObjects.remove(m); });
+        State.resultMarkers = [];
+        State.results = [];
+        State.allResults = [];
+        State.ultraResults = null;
+        State.displayCount = 5;
+        App.hideRoutes();
+        App.hideHeatmap();
+        if (DOM.resultsContent) DOM.resultsContent.innerHTML = '<div class="empty-state">Запустите поиск</div>';
+        if (DOM.resultsBadge) DOM.resultsBadge.textContent = '—';
+        if ($('ultraCompareContainer')) $('ultraCompareContainer').style.display = 'none';
+        if (DOM.routesPanel) DOM.routesPanel.style.display = 'none';
+        UI.showLiveStats(false);
+        UI.updateFindButton();
+      },
+      
+      loadMore: () => {
+        State.displayCount = Math.min(State.displayCount + 5, State.allResults.length);
+        State.results = State.allResults.slice(0, State.displayCount);
+        App.showAllResultMarkers(State.results);
+        UI.showSelectedResult(State.selectedResultIndex);
+      },
+      
+      // Показать превью сетки на карте
+      showGridPreview: () => {
+        App.hideGridPreview();
+        
+        if (State.points.length < 2) return;
+        
+        const gridSize = Utils.clamp(DOM.gridSize?.value, 3, 12, 6);
+        const expandH = Utils.clamp(DOM.gridExpandH?.value, 0, 100, 20);
+        const expandV = Utils.clamp(DOM.gridExpandV?.value, 0, 100, 20);
+        const bbox = Math2.bbox(State.points, expandH, expandV);
+        const candidates = Math2.generateGrid(State.points, gridSize, expandH, expandV);
+        
+        // Рисуем прямоугольник области поиска
+        const rect = new ymaps.Rectangle([
+          [bbox.minLat, bbox.minLon],
+          [bbox.maxLat, bbox.maxLon]
+        ], {}, {
+          fillColor: 'rgba(77,159,255,0.08)',
+          strokeColor: '#4d9fff',
+          strokeWidth: 2,
+          strokeStyle: 'solid'
+        });
+        State.map.geoObjects.add(rect);
+        State.gridPreviewObjects.push(rect);
+        
+        // Рисуем линии сетки
+        const latStep = (bbox.maxLat - bbox.minLat) / gridSize;
+        const lonStep = (bbox.maxLon - bbox.minLon) / gridSize;
+        
+        // Горизонтальные линии
+        for (let i = 0; i <= gridSize; i++) {
+          const lat = bbox.minLat + i * latStep;
+          const line = new ymaps.Polyline([[lat, bbox.minLon], [lat, bbox.maxLon]], {}, {
+            strokeColor: '#4d9fff',
+            strokeWidth: 1,
+            strokeOpacity: 0.4
+          });
+          State.map.geoObjects.add(line);
+          State.gridPreviewObjects.push(line);
+        }
+        
+        // Вертикальные линии
+        for (let j = 0; j <= gridSize; j++) {
+          const lon = bbox.minLon + j * lonStep;
+          const line = new ymaps.Polyline([[bbox.minLat, lon], [bbox.maxLat, lon]], {}, {
+            strokeColor: '#4d9fff',
+            strokeWidth: 1,
+            strokeOpacity: 0.4
+          });
+          State.map.geoObjects.add(line);
+          State.gridPreviewObjects.push(line);
+        }
+        
+        // Рисуем точки-кандидаты в центрах ячеек
+        candidates.forEach((c, i) => {
+          const circle = new ymaps.Circle([c, 80], {}, {
+            fillColor: i === 0 ? '#4d9fff' : '#6b7280',
+            fillOpacity: i === 0 ? 0.8 : 0.5,
+            strokeColor: i === 0 ? '#4d9fff' : '#6b7280',
+            strokeWidth: 1
+          });
+          State.map.geoObjects.add(circle);
+          State.gridPreviewObjects.push(circle);
+        });
+        
+        State.showingGrid = true;
+        if ($('btnShowGrid')) $('btnShowGrid').classList.add('active');
+        
+        App.fitAll();
+      },
+      
+      hideGridPreview: () => {
+        State.gridPreviewObjects.forEach(o => State.map.geoObjects.remove(o));
+        State.gridPreviewObjects = [];
+        State.showingGrid = false;
+        if ($('btnShowGrid')) $('btnShowGrid').classList.remove('active');
+      },
+      
+      toggleGridPreview: () => {
+        if (State.showingGrid) {
+          App.hideGridPreview();
+        } else {
+          App.showGridPreview();
+        }
+      },
+      
+      // Показать тепловую карту результатов
+      showHeatmap: (results, metric) => {
+        App.hideHeatmap();
+        
+        if (results.length < 2) return;
+        
+        const scores = results.map(r => r.scores[metric]);
+        const minScore = Math.min(...scores);
+        const maxScore = Math.max(...scores);
+        
+        // Вычисляем оптимальный радиус на основе расстояния между точками
+        const lats = results.map(r => r.coords[0]);
+        const lons = results.map(r => r.coords[1]);
+        const latRange = Math.max(...lats) - Math.min(...lats);
+        const lonRange = Math.max(...lons) - Math.min(...lons);
+        const gridSize = Math.sqrt(results.length);
+        const cellSize = Math.max(latRange, lonRange) / gridSize;
+        // Радиус примерно равен половине размера ячейки в метрах (1 градус ~ 111 км)
+        const radius = Math.max(200, Math.min(2000, cellSize * 111000 * 0.5));
+        
+        results.forEach(r => {
+          const color = Utils.scoreToColor(r.scores[metric], minScore, maxScore);
+          const circle = new ymaps.Circle([r.coords, radius], {}, {
+            fillColor: color,
+            strokeColor: color.replace('0.5)', '0.8)'),
+            strokeWidth: 1,
+            fillOpacity: 0.5
+          });
+          State.map.geoObjects.add(circle);
+          State.heatmapObjects.push(circle);
+        });
+      },
+      
+      hideHeatmap: () => {
+        State.heatmapObjects.forEach(o => State.map.geoObjects.remove(o));
+        State.heatmapObjects = [];
+      },
+      
+      showAllResultMarkers: results => {
+        State.resultMarkers.forEach(m => { if (m) State.map.geoObjects.remove(m); });
+        State.resultMarkers = [];
+        
+        results.forEach((result, i) => {
+          const timesText = result.routes.map(r => {
+            const walkExtra = r.walkAfterTransport > 60 ? ` (+${Utils.secToStrShort(r.walkAfterTransport)} 🚶)` : '';
+            return `${r.name}: ${Utils.secToStr(r.duration)}${walkExtra}`;
+          }).join('<br>');
+          const walkNote = result.maxWalk < 180 ? '<br><em style="color:#34d399;">🚇 Рядом с транспортом</em>' : '';
+          
+          const marker = new ymaps.Placemark(result.coords, {
+            iconCaption: `#${i + 1}`,
+            balloonContentHeader: `<strong>⭐ #${i + 1} Точка встречи</strong>`,
+            balloonContentBody: `
+              <div style="font-size:12px;margin-bottom:8px;">
+                <strong>Среднее:</strong> ${Utils.secToStr(result.mean)}<br>
+                <strong>Разница:</strong> ${Utils.secToStr(result.range)}
+                ${walkNote}
+              </div>
+              <div style="font-size:11px;border-top:1px solid #ddd;padding-top:6px;">
+                ${timesText}
+              </div>
+            `,
+            balloonContentFooter: `<code style="font-size:10px;">${Utils.fmtCoord(result.coords)}</code>`
+          }, { 
+            preset: i === 0 ? 'islands#redStarIcon' : 'islands#grayCircleDotIcon',
+            iconColor: RESULT_COLORS[Math.min(i, RESULT_COLORS.length - 1)]
+          });
+          
+          marker.events.add('click', () => {
+            App.selectResult(i);
+          });
+          
+          State.map.geoObjects.add(marker);
+          State.resultMarkers.push(marker);
+        });
+        
+        App.fitAll();
+      },
+      
+      selectResult: index => {
+        if (index < 0 || index >= State.results.length) return;
+        
+        App.hideRoutes();
+        UI.showSelectedResult(index);
+        App.showRoutesOnMap(index);
+      },
+      
+      showRoutesOnMap: async (index) => {
+        if (State.results.length === 0) return;
+        const result = State.results[index];
+        
+        App.hideRoutes();
+        
+        for (const p of State.points) {
+          const mr = new ymaps.multiRouter.MultiRoute({
+            referencePoints: [p.coords, result.coords],
+            params: { routingMode: p.transport === 'auto' ? 'auto' : 'masstransit' }
+          }, { boundsAutoApply: false, routeActiveStrokeColor: p.color, routeActiveStrokeWidth: 4 });
+          
+          State.map.geoObjects.add(mr);
+          State.routeObjects.push(mr);
+          await new Promise(r => setTimeout(r, 80));
+        }
+      },
+      
+      fitAll: () => {
+        if (!State.map || State.points.length === 0) return;
+        const coords = State.points.map(p => p.coords);
+        State.results.forEach(r => coords.push(r.coords));
+        State.gridPreviewObjects.forEach(o => {
+          if (o.geometry?.getCoordinates) {
+            const c = o.geometry.getCoordinates();
+            if (Array.isArray(c) && c.length === 2 && typeof c[0] === 'number') coords.push(c);
+          }
+        });
+        if (coords.length > 0) {
+          State.map.setBounds(ymaps.util.bounds.fromPoints(coords), { checkZoomRange: true, zoomMargin: 60 });
+        }
+      },
+      
+      savePoints: () => {
+        try {
+          const data = State.points.map(p => ({ name: p.name, coords: p.coords, address: p.address, transport: p.transport }));
+          localStorage.setItem('fmp_points', JSON.stringify(data));
+        } catch {}
+      },
+      
+      hideRoutes: () => {
+        State.routeObjects.forEach(r => State.map.geoObjects.remove(r));
+        State.routeObjects = [];
+      },
+      
+      copyCoords: async (coords) => {
+        const ok = await Utils.copyToClipboard(coords);
+        if (ok) UI.setFindStatus('ok', '📋 Координаты скопированы!');
+      },
+      
+      getMyLocation: () => {
+        if (!navigator.geolocation) { alert('Геолокация недоступна'); return; }
+        UI.setFindStatus('warn', '📍 Определяю местоположение...');
+        
+        navigator.geolocation.getCurrentPosition(
+          pos => {
+            const coords = [pos.coords.latitude, pos.coords.longitude];
+            const name = DOM.inputName?.value.trim() || 'Моё местоположение';
+            const transport = DOM.inputTransport?.value || 'masstransit';
+            App.addPoint(coords, { name, transport });
+            if (DOM.inputName) DOM.inputName.value = '';
+            State.map.setCenter(coords, 14, { duration: 300 });
+            UI.setFindStatus('ok', '✅ Геолокация получена');
+          },
+          err => UI.setFindStatus('bad', '❌ ' + err.message),
+          { enableHighAccuracy: true, timeout: 10000 }
+        );
+      },
+      
+      adjustTime: deltaMinutes => {
+        if (!DOM.departureTime) return;
+        const current = DOM.departureTime.value ? new Date(DOM.departureTime.value) : new Date();
+        current.setMinutes(current.getMinutes() + deltaMinutes);
+        const year = current.getFullYear();
+        const month = String(current.getMonth() + 1).padStart(2, '0');
+        const day = String(current.getDate()).padStart(2, '0');
+        const hours = String(current.getHours()).padStart(2, '0');
+        const minutes = String(current.getMinutes()).padStart(2, '0');
+        DOM.departureTime.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+      },
+      
+      setNow: () => {
+        if (!DOM.departureTime) return;
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        DOM.departureTime.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+      },
+      
+      exportStats: () => {
+        const data = { stats: State.stats, history: State.history, exportedAt: new Date().toISOString() };
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `fmp_stats_${new Date().toISOString().slice(0,10)}.json`;
+        a.click();
+      },
+      
+      resetStats: () => {
+        State.stats = { geocode: { total: 0, ok: 0, fail: 0 }, route: { total: 0, ok: 0, fail: 0, timeout: 0 } };
+        UI.updateStats();
+      },
+      
+      init: () => {
+        const ids = ['apiKey','btnLoadApi','btnToggleKey','apiStatus','apiBadge','inputAddr','inputName','inputTransport','btnAddPoint','btnMyLocation','pointsList','pointsBadge','btnClearPoints','btnFitAll','selMetric','gridSize','gridExpandH','gridExpandV','timeout','departureTime','btnNow','btnTimeUp','btnTimeDown','btnTimeDeparture','btnTimeArrival','btnFind','btnCancel','findStatus','progressContainer','progressFill','progressPhase','progressPct','estRequests','estCost','resultsContent','resultsBadge','routesPanel','chipTotal','chipOk','chipFail','btnResetStats','btnExportStats','logArea','btnClearLog','btnCopyLog','themeBtn','btnHelp','btnShowGrid','chkHeatmap'];
+        ids.forEach(id => DOM[id] = $(id));
+        
+        try { const theme = localStorage.getItem('fmp_theme'); if (theme) UI.setTheme(theme); } catch {}
+        try { const stats = localStorage.getItem('fmp_stats'); if (stats) State.stats = JSON.parse(stats); UI.updateStats(); } catch {}
+        try { const key = localStorage.getItem('fmp_apikey'); if (key && DOM.apiKey) DOM.apiKey.value = key; } catch {}
+        
+        if (DOM.departureTime) {
+          const now = new Date();
+          now.setHours(now.getHours() + 1);
+          now.setMinutes(Math.round(now.getMinutes() / 15) * 15);
+          const year = now.getFullYear();
+          const month = String(now.getMonth() + 1).padStart(2, '0');
+          const day = String(now.getDate()).padStart(2, '0');
+          const hours = String(now.getHours()).padStart(2, '0');
+          const minutes = String(now.getMinutes()).padStart(2, '0');
+          DOM.departureTime.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+          
+          DOM.departureTime.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            const delta = e.deltaY < 0 ? 15 : -15;
+            App.adjustTime(delta);
+            return false;
+          }, { passive: false });
+        }
+        
+        if (DOM.themeBtn) DOM.themeBtn.addEventListener('click', UI.toggleTheme);
+        if (DOM.btnHelp) DOM.btnHelp.addEventListener('click', () => UI.openModal('modalHelp'));
+        if (DOM.btnToggleKey) DOM.btnToggleKey.addEventListener('click', () => { if (DOM.apiKey) DOM.apiKey.type = DOM.apiKey.type === 'password' ? 'text' : 'password'; });
+        if (DOM.btnLoadApi) DOM.btnLoadApi.addEventListener('click', () => API.loadYandex(DOM.apiKey?.value));
+        
+        if (DOM.btnTimeDeparture) DOM.btnTimeDeparture.addEventListener('click', () => UI.setTimeMode('departure'));
+        if (DOM.btnTimeArrival) DOM.btnTimeArrival.addEventListener('click', () => UI.setTimeMode('arrival'));
+        
+        if (DOM.btnTimeUp) DOM.btnTimeUp.addEventListener('click', () => App.adjustTime(15));
+        if (DOM.btnTimeDown) DOM.btnTimeDown.addEventListener('click', () => App.adjustTime(-15));
+        if (DOM.btnNow) DOM.btnNow.addEventListener('click', App.setNow);
+        
+        if ($('btnShowGrid')) $('btnShowGrid').addEventListener('click', App.toggleGridPreview);
+        
+        // Обновляем превью при изменении параметров сетки
+        if (DOM.gridSize) DOM.gridSize.addEventListener('change', UI.updateEstimates);
+        if (DOM.gridExpandH) DOM.gridExpandH.addEventListener('change', UI.updateEstimates);
+        if (DOM.gridExpandV) DOM.gridExpandV.addEventListener('change', UI.updateEstimates);
+        
+        if (DOM.btnAddPoint) DOM.btnAddPoint.addEventListener('click', async () => {
+          const addr = DOM.inputAddr?.value.trim();
+          if (!addr) return;
+          
+          if (State.results.length > 0 && !confirm('Добавление новой точки сбросит результаты. Продолжить?')) return;
+          
+          const result = await API.geocode(addr);
+          if (result.ok) {
+            const name = DOM.inputName?.value.trim() || `Точка ${State.points.length + 1}`;
+            const transport = DOM.inputTransport?.value || 'masstransit';
+            App.addPoint(result.coords, { name, address: result.address, transport });
+            if (DOM.inputAddr) DOM.inputAddr.value = '';
+            if (DOM.inputName) DOM.inputName.value = '';
+            State.map.setCenter(result.coords, 14, { duration: 300 });
+          } else {
+            UI.setFindStatus('bad', '❌ ' + result.error);
+          }
+        });
+        
+        if (DOM.inputAddr) DOM.inputAddr.addEventListener('keydown', e => { if (e.key === 'Enter' && DOM.btnAddPoint) DOM.btnAddPoint.click(); });
+        if (DOM.btnMyLocation) DOM.btnMyLocation.addEventListener('click', App.getMyLocation);
+        if (DOM.btnClearPoints) DOM.btnClearPoints.addEventListener('click', () => { if (confirm('Удалить все точки?')) App.clearPoints(); });
+        if (DOM.btnFitAll) DOM.btnFitAll.addEventListener('click', App.fitAll);
+        
+        if (DOM.selMetric) DOM.selMetric.addEventListener('change', UI.updateEstimates);
+        
+        if (DOM.btnFind) DOM.btnFind.addEventListener('click', Algorithm.find);
+        if (DOM.btnCancel) DOM.btnCancel.addEventListener('click', Algorithm.cancel);
+        
+        if (DOM.btnResetStats) DOM.btnResetStats.addEventListener('click', App.resetStats);
+        if (DOM.btnExportStats) DOM.btnExportStats.addEventListener('click', App.exportStats);
+        
+        if (DOM.btnClearLog) DOM.btnClearLog.addEventListener('click', Log.clear);
+        if (DOM.btnCopyLog) DOM.btnCopyLog.addEventListener('click', async () => {
+          try { await navigator.clipboard.writeText(DOM.logArea?.value || ''); Log.append('Лог скопирован'); } catch {}
+        });
+        
+        document.querySelectorAll('.modal-overlay').forEach(m => {
+          m.addEventListener('click', e => { if (e.target === m) m.classList.remove('show'); });
+        });
+        
+        Log.append('Приложение загружено v2.7');
+        
+        if (DOM.apiKey?.value) setTimeout(() => API.loadYandex(DOM.apiKey.value), 300);
+      }
+    };
+    
+    window.App = App;
+    window.UI = UI;
+    App.init();
+  })();
+  </script>
+</body>
+</html>
