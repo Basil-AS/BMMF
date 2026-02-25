@@ -1,0 +1,2942 @@
+[
+  {
+    "location_code": "1095",
+    "location_name": "Abakan"
+  },
+  {
+    "location_code": "29386",
+    "location_name": "Abkhazia"
+  },
+  {
+    "location_code": "11302",
+    "location_name": "Achinsk"
+  },
+  {
+    "location_code": "241",
+    "location_name": "Africa"
+  },
+  {
+    "location_code": "29403",
+    "location_name": "Akmola oblast"
+  },
+  {
+    "location_code": "102515",
+    "location_name": "Akmola Province / Universal"
+  },
+  {
+    "location_code": "102501",
+    "location_name": "Akmola region / Other"
+  },
+  {
+    "location_code": "20273",
+    "location_name": "Aktobe"
+  },
+  {
+    "location_code": "29404",
+    "location_name": "Aktobe oblast"
+  },
+  {
+    "location_code": "102508",
+    "location_name": "Aktobe region / Other"
+  },
+  {
+    "location_code": "102522",
+    "location_name": "Aktobe region / Universal"
+  },
+  {
+    "location_code": "10656",
+    "location_name": "Alexandrov"
+  },
+  {
+    "location_code": "162",
+    "location_name": "Almaty"
+  },
+  {
+    "location_code": "102513",
+    "location_name": "Almaty Province / Universal"
+  },
+  {
+    "location_code": "29406",
+    "location_name": "Almaty region"
+  },
+  {
+    "location_code": "102499",
+    "location_name": "Almaty region / Other"
+  },
+  {
+    "location_code": "11121",
+    "location_name": "Almetyevsk"
+  },
+  {
+    "location_code": "21809",
+    "location_name": "Altai Republic / Other"
+  },
+  {
+    "location_code": "21808",
+    "location_name": "Altai Republic / Universal"
+  },
+  {
+    "location_code": "11235",
+    "location_name": "Altai Territory"
+  },
+  {
+    "location_code": "21797",
+    "location_name": "Altay / Other"
+  },
+  {
+    "location_code": "21796",
+    "location_name": "Altay / Universal"
+  },
+  {
+    "location_code": "11471",
+    "location_name": "Alushta"
+  },
+  {
+    "location_code": "21792",
+    "location_name": "Amur Region / Other"
+  },
+  {
+    "location_code": "21791",
+    "location_name": "Amur Region / Universal"
+  },
+  {
+    "location_code": "11375",
+    "location_name": "Amurskaya oblast"
+  },
+  {
+    "location_code": "11458",
+    "location_name": "Anadyr"
+  },
+  {
+    "location_code": "1107",
+    "location_name": "Anapa"
+  },
+  {
+    "location_code": "11256",
+    "location_name": "Angarsk"
+  },
+  {
+    "location_code": "10894",
+    "location_name": "Apatity"
+  },
+  {
+    "location_code": "245",
+    "location_name": "Arctic and Antarctic"
+  },
+  {
+    "location_code": "93",
+    "location_name": "Argentina"
+  },
+  {
+    "location_code": "10842",
+    "location_name": "Arkhangelsk Oblast"
+  },
+  {
+    "location_code": "21895",
+    "location_name": "Arkhangelsk region / Other"
+  },
+  {
+    "location_code": "21894",
+    "location_name": "Arkhangelskaya region / Universal"
+  },
+  {
+    "location_code": "10987",
+    "location_name": "Armavir"
+  },
+  {
+    "location_code": "168",
+    "location_name": "Armenia"
+  },
+  {
+    "location_code": "11080",
+    "location_name": "Arzamas"
+  },
+  {
+    "location_code": "183",
+    "location_name": "Asia"
+  },
+  {
+    "location_code": "797",
+    "location_name": "Asia / Others"
+  },
+  {
+    "location_code": "798",
+    "location_name": "Asia / Universal"
+  },
+  {
+    "location_code": "163",
+    "location_name": "Astana"
+  },
+  {
+    "location_code": "21867",
+    "location_name": "Astrakhan region / Other"
+  },
+  {
+    "location_code": "21866",
+    "location_name": "Astrakhan region / Universal"
+  },
+  {
+    "location_code": "86",
+    "location_name": "Atlanta"
+  },
+  {
+    "location_code": "29407",
+    "location_name": "Atyrau region"
+  },
+  {
+    "location_code": "102509",
+    "location_name": "Atyrau region / Other"
+  },
+  {
+    "location_code": "102523",
+    "location_name": "Atyrau region / Universal"
+  },
+  {
+    "location_code": "211",
+    "location_name": "Australia"
+  },
+  {
+    "location_code": "138",
+    "location_name": "Australia and Oceania"
+  },
+  {
+    "location_code": "829",
+    "location_name": "Australia and Oceania / Others"
+  },
+  {
+    "location_code": "830",
+    "location_name": "Australia and Oceania / Universal"
+  },
+  {
+    "location_code": "113",
+    "location_name": "Austria"
+  },
+  {
+    "location_code": "167",
+    "location_name": "Azerbaijan"
+  },
+  {
+    "location_code": "11143",
+    "location_name": "Balakovo"
+  },
+  {
+    "location_code": "10716",
+    "location_name": "Balashikha"
+  },
+  {
+    "location_code": "10314",
+    "location_name": "Balti"
+  },
+  {
+    "location_code": "981",
+    "location_name": "Baltic Countries / Other"
+  },
+  {
+    "location_code": "982",
+    "location_name": "Baltic Countries / Universal"
+  },
+  {
+    "location_code": "980",
+    "location_name": "Baltic States"
+  },
+  {
+    "location_code": "197",
+    "location_name": "Barnaul"
+  },
+  {
+    "location_code": "11111",
+    "location_name": "Bashkortostan"
+  },
+  {
+    "location_code": "129",
+    "location_name": "Beer Sheva"
+  },
+  {
+    "location_code": "149",
+    "location_name": "Belarus"
+  },
+  {
+    "location_code": "893",
+    "location_name": "Belarus / Other"
+  },
+  {
+    "location_code": "894",
+    "location_name": "Belarus / Universal"
+  },
+  {
+    "location_code": "114",
+    "location_name": "Belgium"
+  },
+  {
+    "location_code": "4",
+    "location_name": "Belgorod"
+  },
+  {
+    "location_code": "10645",
+    "location_name": "Belgorod region"
+  },
+  {
+    "location_code": "21911",
+    "location_name": "Belgorod region / Other"
+  },
+  {
+    "location_code": "21910",
+    "location_name": "Belgorod region / Universal"
+  },
+  {
+    "location_code": "11374",
+    "location_name": "Belogorsk"
+  },
+  {
+    "location_code": "10315",
+    "location_name": "Bender"
+  },
+  {
+    "location_code": "11314",
+    "location_name": "Berdsk"
+  },
+  {
+    "location_code": "177",
+    "location_name": "Berlin"
+  },
+  {
+    "location_code": "11393",
+    "location_name": "Birobidzhan"
+  },
+  {
+    "location_code": "975",
+    "location_name": "Biysk"
+  },
+  {
+    "location_code": "77",
+    "location_name": "Blagoveshchensk"
+  },
+  {
+    "location_code": "976",
+    "location_name": "Bratsk"
+  },
+  {
+    "location_code": "94",
+    "location_name": "Brazil"
+  },
+  {
+    "location_code": "153",
+    "location_name": "Brest"
+  },
+  {
+    "location_code": "29632",
+    "location_name": "Brest"
+  },
+  {
+    "location_code": "101859",
+    "location_name": "Brest region / Others"
+  },
+  {
+    "location_code": "101858",
+    "location_name": "Brest region / Universal"
+  },
+  {
+    "location_code": "191",
+    "location_name": "Bryansk"
+  },
+  {
+    "location_code": "10650",
+    "location_name": "Bryansk region"
+  },
+  {
+    "location_code": "21913",
+    "location_name": "Bryansk region / Other"
+  },
+  {
+    "location_code": "21912",
+    "location_name": "Bryansk region / Universal"
+  },
+  {
+    "location_code": "11122",
+    "location_name": "Bugulma"
+  },
+  {
+    "location_code": "115",
+    "location_name": "Bulgaria"
+  },
+  {
+    "location_code": "11330",
+    "location_name": "Buryatia"
+  },
+  {
+    "location_code": "95",
+    "location_name": "Canada"
+  },
+  {
+    "location_code": "1048",
+    "location_name": "Canada / Other"
+  },
+  {
+    "location_code": "1049",
+    "location_name": "Canada / Universal"
+  },
+  {
+    "location_code": "10664",
+    "location_name": "Carpet"
+  },
+  {
+    "location_code": "3",
+    "location_name": "Center"
+  },
+  {
+    "location_code": "413",
+    "location_name": "Center / Other cities in the region"
+  },
+  {
+    "location_code": "414",
+    "location_name": "Center / Universal"
+  },
+  {
+    "location_code": "11024",
+    "location_name": "Chechen Republic"
+  },
+  {
+    "location_code": "21891",
+    "location_name": "Chechen Republic / Other"
+  },
+  {
+    "location_code": "21890",
+    "location_name": "Chechen Republic / Universal"
+  },
+  {
+    "location_code": "10761",
+    "location_name": "Chekhov"
+  },
+  {
+    "location_code": "11225",
+    "location_name": "Chelyabinsk region"
+  },
+  {
+    "location_code": "21834",
+    "location_name": "Chelyabinsk Region / Others"
+  },
+  {
+    "location_code": "21833",
+    "location_name": "Chelyabinsk Region / Universal"
+  },
+  {
+    "location_code": "968",
+    "location_name": "Cherepovets"
+  },
+  {
+    "location_code": "10363",
+    "location_name": "Cherkasy"
+  },
+  {
+    "location_code": "20546",
+    "location_name": "Cherkasy oblast"
+  },
+  {
+    "location_code": "102451",
+    "location_name": "Cherkasy region / Other"
+  },
+  {
+    "location_code": "102476",
+    "location_name": "Cherkasy region / Universal"
+  },
+  {
+    "location_code": "1104",
+    "location_name": "Cherkessk"
+  },
+  {
+    "location_code": "20551",
+    "location_name": "Chernigov region"
+  },
+  {
+    "location_code": "102498",
+    "location_name": "Chernigov region / Universal"
+  },
+  {
+    "location_code": "966",
+    "location_name": "Chernihiv"
+  },
+  {
+    "location_code": "102473",
+    "location_name": "Chernihiv region / Other"
+  },
+  {
+    "location_code": "10365",
+    "location_name": "Chernivtsi"
+  },
+  {
+    "location_code": "20533",
+    "location_name": "Chernivtsi region"
+  },
+  {
+    "location_code": "102468",
+    "location_name": "Chernivtsi region / Other"
+  },
+  {
+    "location_code": "102493",
+    "location_name": "Chernivtsi region / Universal"
+  },
+  {
+    "location_code": "219",
+    "location_name": "Chernogolovka"
+  },
+  {
+    "location_code": "134",
+    "location_name": "China"
+  },
+  {
+    "location_code": "10313",
+    "location_name": "Chisinau"
+  },
+  {
+    "location_code": "68",
+    "location_name": "Chita"
+  },
+  {
+    "location_code": "11202",
+    "location_name": "Chrysostom"
+  },
+  {
+    "location_code": "10251",
+    "location_name": "Chukotka Autonomous District"
+  },
+  {
+    "location_code": "21785",
+    "location_name": "Chukotka Autonomous District / Universal"
+  },
+  {
+    "location_code": "21786",
+    "location_name": "Chukotka Autonomous Okrug / Other"
+  },
+  {
+    "location_code": "11156",
+    "location_name": "Chuvash Republic"
+  },
+  {
+    "location_code": "21865",
+    "location_name": "Chuvash Republic / Other"
+  },
+  {
+    "location_code": "21864",
+    "location_name": "Chuvash Republic / Universal"
+  },
+  {
+    "location_code": "166",
+    "location_name": "CIS"
+  },
+  {
+    "location_code": "957",
+    "location_name": "CIS / Other"
+  },
+  {
+    "location_code": "958",
+    "location_name": "CIS / Universal"
+  },
+  {
+    "location_code": "98",
+    "location_name": "Cologne"
+  },
+  {
+    "location_code": "33883",
+    "location_name": "Comrat"
+  },
+  {
+    "location_code": "977",
+    "location_name": "Crimea"
+  },
+  {
+    "location_code": "978",
+    "location_name": "Crimea / Other region of the city"
+  },
+  {
+    "location_code": "979",
+    "location_name": "Crimea / Universal"
+  },
+  {
+    "location_code": "115092",
+    "location_name": "Crimean Federal District"
+  },
+  {
+    "location_code": "10083",
+    "location_name": "Croatia"
+  },
+  {
+    "location_code": "20574",
+    "location_name": "Cyprus"
+  },
+  {
+    "location_code": "125",
+    "location_name": "Czech Republic"
+  },
+  {
+    "location_code": "11010",
+    "location_name": "Dagestan"
+  },
+  {
+    "location_code": "203",
+    "location_name": "Denmark"
+  },
+  {
+    "location_code": "89",
+    "location_name": "Detroit"
+  },
+  {
+    "location_code": "11155",
+    "location_name": "Dimitrovgrad"
+  },
+  {
+    "location_code": "10723",
+    "location_name": "Dmitrov"
+  },
+  {
+    "location_code": "141",
+    "location_name": "Dnepropetrovsk"
+  },
+  {
+    "location_code": "102457",
+    "location_name": "Dnepropetrovsk region / Others"
+  },
+  {
+    "location_code": "102482",
+    "location_name": "Dnepropetrovsk region / Universal"
+  },
+  {
+    "location_code": "20537",
+    "location_name": "Dnipropetrovsk region"
+  },
+  {
+    "location_code": "214",
+    "location_name": "Dolgoprudnyi"
+  },
+  {
+    "location_code": "10725",
+    "location_name": "Domodedovo"
+  },
+  {
+    "location_code": "142",
+    "location_name": "Donetsk"
+  },
+  {
+    "location_code": "20536",
+    "location_name": "Donetsk region"
+  },
+  {
+    "location_code": "102456",
+    "location_name": "Donetsk region / Other"
+  },
+  {
+    "location_code": "102481",
+    "location_name": "Donetsk region / Universal"
+  },
+  {
+    "location_code": "215",
+    "location_name": "Dubna"
+  },
+  {
+    "location_code": "972",
+    "location_name": "Dzerzhinsk"
+  },
+  {
+    "location_code": "29408",
+    "location_name": "East Kazakhstan region"
+  },
+  {
+    "location_code": "102502",
+    "location_name": "East Kazakhstan region / Other"
+  },
+  {
+    "location_code": "102516",
+    "location_name": "East-Kazakhstan region / Universal"
+  },
+  {
+    "location_code": "1056",
+    "location_name": "Egypt"
+  },
+  {
+    "location_code": "20523",
+    "location_name": "Elektrostal"
+  },
+  {
+    "location_code": "1094",
+    "location_name": "Elista"
+  },
+  {
+    "location_code": "11147",
+    "location_name": "Engels"
+  },
+  {
+    "location_code": "11057",
+    "location_name": "Essentuki"
+  },
+  {
+    "location_code": "179",
+    "location_name": "Estonia"
+  },
+  {
+    "location_code": "111",
+    "location_name": "Europe"
+  },
+  {
+    "location_code": "733",
+    "location_name": "Europe / Others"
+  },
+  {
+    "location_code": "734",
+    "location_name": "Europe / Universal"
+  },
+  {
+    "location_code": "165",
+    "location_name": "Families"
+  },
+  {
+    "location_code": "73",
+    "location_name": "Far East"
+  },
+  {
+    "location_code": "605",
+    "location_name": "Far East / Other cities in the region"
+  },
+  {
+    "location_code": "606",
+    "location_name": "Far East / Universal"
+  },
+  {
+    "location_code": "11469",
+    "location_name": "Feodosiya"
+  },
+  {
+    "location_code": "123",
+    "location_name": "Finland"
+  },
+  {
+    "location_code": "124",
+    "location_name": "France"
+  },
+  {
+    "location_code": "100",
+    "location_name": "Frankfurt am Main"
+  },
+  {
+    "location_code": "10867",
+    "location_name": "Gatchina"
+  },
+  {
+    "location_code": "10990",
+    "location_name": "Gelendzhik"
+  },
+  {
+    "location_code": "169",
+    "location_name": "Georgia"
+  },
+  {
+    "location_code": "96",
+    "location_name": "Germany"
+  },
+  {
+    "location_code": "701",
+    "location_name": "Germany / Others"
+  },
+  {
+    "location_code": "702",
+    "location_name": "Germany / Universal"
+  },
+  {
+    "location_code": "11150",
+    "location_name": "Glazov"
+  },
+  {
+    "location_code": "155",
+    "location_name": "Gomel"
+  },
+  {
+    "location_code": "29631",
+    "location_name": "Gomel oblast"
+  },
+  {
+    "location_code": "101855",
+    "location_name": "Gomel region / Other"
+  },
+  {
+    "location_code": "101854",
+    "location_name": "Gomel region / Universal"
+  },
+  {
+    "location_code": "10661",
+    "location_name": "Goose-crystal"
+  },
+  {
+    "location_code": "11319",
+    "location_name": "Gorno-Altaisk"
+  },
+  {
+    "location_code": "246",
+    "location_name": "Greece"
+  },
+  {
+    "location_code": "29634",
+    "location_name": "Grodno oblast"
+  },
+  {
+    "location_code": "101861",
+    "location_name": "Grodno region / Other"
+  },
+  {
+    "location_code": "101860",
+    "location_name": "Grodno region / Universal"
+  },
+  {
+    "location_code": "1106",
+    "location_name": "Grozny"
+  },
+  {
+    "location_code": "132",
+    "location_name": "Haifa"
+  },
+  {
+    "location_code": "178",
+    "location_name": "Hamburg"
+  },
+  {
+    "location_code": "11457",
+    "location_name": "Harabov"
+  },
+  {
+    "location_code": "97",
+    "location_name": "Heidelberg"
+  },
+  {
+    "location_code": "116",
+    "location_name": "Hungary"
+  },
+  {
+    "location_code": "994",
+    "location_name": "India"
+  },
+  {
+    "location_code": "11012",
+    "location_name": "Ingushetia"
+  },
+  {
+    "location_code": "11266",
+    "location_name": "Irkutsk Region"
+  },
+  {
+    "location_code": "21799",
+    "location_name": "Irkutsk Region / Other"
+  },
+  {
+    "location_code": "21798",
+    "location_name": "Irkutsk Region / Universal"
+  },
+  {
+    "location_code": "11173",
+    "location_name": "Ishim"
+  },
+  {
+    "location_code": "181",
+    "location_name": "Israel"
+  },
+  {
+    "location_code": "765",
+    "location_name": "Israel / Others"
+  },
+  {
+    "location_code": "766",
+    "location_name": "Israel / Universal"
+  },
+  {
+    "location_code": "205",
+    "location_name": "Italy"
+  },
+  {
+    "location_code": "102471",
+    "location_name": "Ivano-Frankivsk region / Other"
+  },
+  {
+    "location_code": "102496",
+    "location_name": "Ivano-Frankivsk region / Universal"
+  },
+  {
+    "location_code": "10345",
+    "location_name": "Ivano-Frankovsk"
+  },
+  {
+    "location_code": "5",
+    "location_name": "Ivanovo"
+  },
+  {
+    "location_code": "10687",
+    "location_name": "Ivanovo region"
+  },
+  {
+    "location_code": "21919",
+    "location_name": "Ivanovo region / Other"
+  },
+  {
+    "location_code": "21918",
+    "location_name": "Ivanovo region / Universal"
+  },
+  {
+    "location_code": "137",
+    "location_name": "Japan"
+  },
+  {
+    "location_code": "130",
+    "location_name": "Jerusalem"
+  },
+  {
+    "location_code": "10243",
+    "location_name": "Jewish Autonomous Region"
+  },
+  {
+    "location_code": "21784",
+    "location_name": "Jewish Autonomous Region / Other"
+  },
+  {
+    "location_code": "21783",
+    "location_name": "Jewish Autonomous Region / Universal"
+  },
+  {
+    "location_code": "10857",
+    "location_name": "Kaliningrad Oblast"
+  },
+  {
+    "location_code": "21899",
+    "location_name": "Kaliningrad region / Other"
+  },
+  {
+    "location_code": "21898",
+    "location_name": "Kaliningrad region / Universal"
+  },
+  {
+    "location_code": "11015",
+    "location_name": "Kalmykia"
+  },
+  {
+    "location_code": "6",
+    "location_name": "Kaluga"
+  },
+  {
+    "location_code": "10693",
+    "location_name": "Kaluga region"
+  },
+  {
+    "location_code": "21921",
+    "location_name": "Kaluga region / Other"
+  },
+  {
+    "location_code": "21920",
+    "location_name": "Kaluga region / Universal"
+  },
+  {
+    "location_code": "21794",
+    "location_name": "Kamchatka Krai / Other"
+  },
+  {
+    "location_code": "11398",
+    "location_name": "Kamchatka Territory"
+  },
+  {
+    "location_code": "21793",
+    "location_name": "Kamchatka Territory / Universal"
+  },
+  {
+    "location_code": "11164",
+    "location_name": "Kamensk"
+  },
+  {
+    "location_code": "11043",
+    "location_name": "Kamensk-"
+  },
+  {
+    "location_code": "11020",
+    "location_name": "Karachay-Cherkess Republic"
+  },
+  {
+    "location_code": "21883",
+    "location_name": "Karachay-Cherkess Republic / Other"
+  },
+  {
+    "location_code": "21882",
+    "location_name": "Karachay-Cherkess Republic / Universal"
+  },
+  {
+    "location_code": "164",
+    "location_name": "Karaganda"
+  },
+  {
+    "location_code": "29411",
+    "location_name": "Karaganda region"
+  },
+  {
+    "location_code": "102500",
+    "location_name": "Karaganda region / Other"
+  },
+  {
+    "location_code": "102514",
+    "location_name": "Karagandy / Universal"
+  },
+  {
+    "location_code": "11306",
+    "location_name": "Kayerkan"
+  },
+  {
+    "location_code": "159",
+    "location_name": "Kazakhstan"
+  },
+  {
+    "location_code": "925",
+    "location_name": "Kazakhstan / Other"
+  },
+  {
+    "location_code": "926",
+    "location_name": "Kazakhstan / Universal"
+  },
+  {
+    "location_code": "21800",
+    "location_name": "Kemerovo Oblast / Universal"
+  },
+  {
+    "location_code": "11282",
+    "location_name": "Kemerovo Region"
+  },
+  {
+    "location_code": "21801",
+    "location_name": "Kemerovo region / Other"
+  },
+  {
+    "location_code": "11464",
+    "location_name": "Kerch"
+  },
+  {
+    "location_code": "76",
+    "location_name": "Khabarovsk"
+  },
+  {
+    "location_code": "21790",
+    "location_name": "Khabarovsk Territory / Other"
+  },
+  {
+    "location_code": "21789",
+    "location_name": "Khabarovsk Territory / Universal"
+  },
+  {
+    "location_code": "11340",
+    "location_name": "Khakassia"
+  },
+  {
+    "location_code": "21832",
+    "location_name": "Khanty-Mansi Autonomous Okrug / Other"
+  },
+  {
+    "location_code": "21831",
+    "location_name": "Khanty-Mansi Autonomous Okrug / Universal"
+  },
+  {
+    "location_code": "11193",
+    "location_name": "Khanty-Mansiysk"
+  },
+  {
+    "location_code": "147",
+    "location_name": "Kharkiv"
+  },
+  {
+    "location_code": "20538",
+    "location_name": "Kharkiv Oblast"
+  },
+  {
+    "location_code": "102455",
+    "location_name": "Kharkiv region / Other"
+  },
+  {
+    "location_code": "102480",
+    "location_name": "Kharkiv region / Universal"
+  },
+  {
+    "location_code": "962",
+    "location_name": "Kherson"
+  },
+  {
+    "location_code": "20542",
+    "location_name": "Kherson Oblast"
+  },
+  {
+    "location_code": "102462",
+    "location_name": "Kherson region / Other"
+  },
+  {
+    "location_code": "102487",
+    "location_name": "Kherson region / Universal"
+  },
+  {
+    "location_code": "10758",
+    "location_name": "Khimki"
+  },
+  {
+    "location_code": "961",
+    "location_name": "Khmelnitsky"
+  },
+  {
+    "location_code": "20535",
+    "location_name": "Khmelnytsky region"
+  },
+  {
+    "location_code": "102465",
+    "location_name": "Khmelnytsky region / Other"
+  },
+  {
+    "location_code": "102490",
+    "location_name": "Khmelnytsky region / Universal"
+  },
+  {
+    "location_code": "143",
+    "location_name": "Kiev"
+  },
+  {
+    "location_code": "20544",
+    "location_name": "Kiev Oblast"
+  },
+  {
+    "location_code": "101864",
+    "location_name": "Kiev region / Other"
+  },
+  {
+    "location_code": "101865",
+    "location_name": "Kiev region / Universal"
+  },
+  {
+    "location_code": "11070",
+    "location_name": "Kirov Region"
+  },
+  {
+    "location_code": "21838",
+    "location_name": "Kirov Region / Other"
+  },
+  {
+    "location_code": "21837",
+    "location_name": "Kirov Region / Universal"
+  },
+  {
+    "location_code": "11071",
+    "location_name": "Kirovo-Chepetsk"
+  },
+  {
+    "location_code": "20548",
+    "location_name": "Kirovograd region"
+  },
+  {
+    "location_code": "102453",
+    "location_name": "Kirovograd region / Other"
+  },
+  {
+    "location_code": "102478",
+    "location_name": "Kirovograd region / Universal"
+  },
+  {
+    "location_code": "20221",
+    "location_name": "Kirovohrad"
+  },
+  {
+    "location_code": "11062",
+    "location_name": "Kislovodsk"
+  },
+  {
+    "location_code": "20809",
+    "location_name": "Kokshetau"
+  },
+  {
+    "location_code": "10734",
+    "location_name": "Kolomna"
+  },
+  {
+    "location_code": "21909",
+    "location_name": "Komi Republic / Other"
+  },
+  {
+    "location_code": "21908",
+    "location_name": "Komi Republic / Universal"
+  },
+  {
+    "location_code": "11453",
+    "location_name": "Komsomolsk-on-Amur"
+  },
+  {
+    "location_code": "135",
+    "location_name": "Korea"
+  },
+  {
+    "location_code": "20728",
+    "location_name": "Korolev"
+  },
+  {
+    "location_code": "102518",
+    "location_name": "Kostanay / Universal"
+  },
+  {
+    "location_code": "29412",
+    "location_name": "Kostanay region"
+  },
+  {
+    "location_code": "102504",
+    "location_name": "Kostanay region / Other"
+  },
+  {
+    "location_code": "7",
+    "location_name": "Kostroma"
+  },
+  {
+    "location_code": "10699",
+    "location_name": "Kostroma region"
+  },
+  {
+    "location_code": "21923",
+    "location_name": "Kostroma region / Other"
+  },
+  {
+    "location_code": "21922",
+    "location_name": "Kostroma region / Universal"
+  },
+  {
+    "location_code": "20554",
+    "location_name": "Kramatorsk"
+  },
+  {
+    "location_code": "10995",
+    "location_name": "Krasnodar Territory"
+  },
+  {
+    "location_code": "21871",
+    "location_name": "Krasnodar Territory / Other"
+  },
+  {
+    "location_code": "21870",
+    "location_name": "Krasnodar Territory / Universal"
+  },
+  {
+    "location_code": "10735",
+    "location_name": "Krasnogorsk"
+  },
+  {
+    "location_code": "21803",
+    "location_name": "Krasnoyarsk Krai / Other"
+  },
+  {
+    "location_code": "21802",
+    "location_name": "Krasnoyarsk Krai / Universal"
+  },
+  {
+    "location_code": "11309",
+    "location_name": "Krasnoyarsk region"
+  },
+  {
+    "location_code": "21609",
+    "location_name": "Kremenchuk"
+  },
+  {
+    "location_code": "10347",
+    "location_name": "Kryvyi Rih"
+  },
+  {
+    "location_code": "20044",
+    "location_name": "Kstovo"
+  },
+  {
+    "location_code": "11158",
+    "location_name": "Kurgan oblast"
+  },
+  {
+    "location_code": "21826",
+    "location_name": "Kurgan Region / Other"
+  },
+  {
+    "location_code": "21825",
+    "location_name": "Kurgan Region / Universal"
+  },
+  {
+    "location_code": "10705",
+    "location_name": "Kursk region"
+  },
+  {
+    "location_code": "21925",
+    "location_name": "Kursk region / Other"
+  },
+  {
+    "location_code": "21924",
+    "location_name": "Kursk region / Universal"
+  },
+  {
+    "location_code": "207",
+    "location_name": "Kyrgyzstan"
+  },
+  {
+    "location_code": "11333",
+    "location_name": "Kyzyl"
+  },
+  {
+    "location_code": "29413",
+    "location_name": "Kyzylorda oblast"
+  },
+  {
+    "location_code": "102512",
+    "location_name": "Kyzylorda Province / Miscellaneous"
+  },
+  {
+    "location_code": "102526",
+    "location_name": "Kyzylorda region / Universal"
+  },
+  {
+    "location_code": "206",
+    "location_name": "Latvia"
+  },
+  {
+    "location_code": "10712",
+    "location_name": "Lipetsk region"
+  },
+  {
+    "location_code": "21927",
+    "location_name": "Lipetsk region / Other"
+  },
+  {
+    "location_code": "21926",
+    "location_name": "Lipetsk region / Universal"
+  },
+  {
+    "location_code": "117",
+    "location_name": "Lithuania"
+  },
+  {
+    "location_code": "200",
+    "location_name": "Los Angeles"
+  },
+  {
+    "location_code": "222",
+    "location_name": "Lugansk"
+  },
+  {
+    "location_code": "20540",
+    "location_name": "Luhansk Oblast"
+  },
+  {
+    "location_code": "102458",
+    "location_name": "Luhansk region / Other"
+  },
+  {
+    "location_code": "102483",
+    "location_name": "Luhansk region / Universal"
+  },
+  {
+    "location_code": "20222",
+    "location_name": "Lutsk"
+  },
+  {
+    "location_code": "144",
+    "location_name": "Lviv"
+  },
+  {
+    "location_code": "20529",
+    "location_name": "Lviv region"
+  },
+  {
+    "location_code": "102464",
+    "location_name": "Lviv region / Other"
+  },
+  {
+    "location_code": "102489",
+    "location_name": "Lviv region / Universal"
+  },
+  {
+    "location_code": "10738",
+    "location_name": "Lyubertsy"
+  },
+  {
+    "location_code": "223",
+    "location_name": "MA"
+  },
+  {
+    "location_code": "79",
+    "location_name": "Magadan"
+  },
+  {
+    "location_code": "11403",
+    "location_name": "Magadan Region"
+  },
+  {
+    "location_code": "21782",
+    "location_name": "Magadan Region / Other"
+  },
+  {
+    "location_code": "21781",
+    "location_name": "Magadan Region / Universal"
+  },
+  {
+    "location_code": "10068",
+    "location_name": "Macedonia"
+  },
+  {
+    "location_code": "235",
+    "location_name": "Magnitogorsk"
+  },
+  {
+    "location_code": "24876",
+    "location_name": "Makiyivka"
+  },
+  {
+    "location_code": "10069",
+    "location_name": "Malta"
+  },
+  {
+    "location_code": "102510",
+    "location_name": "Mangistau region / Other"
+  },
+  {
+    "location_code": "102524",
+    "location_name": "Mangistau region / Universal"
+  },
+  {
+    "location_code": "29414",
+    "location_name": "Mangystau"
+  },
+  {
+    "location_code": "21840",
+    "location_name": "Mari El Republic / Other"
+  },
+  {
+    "location_code": "21839",
+    "location_name": "Mari El Republic / Universal"
+  },
+  {
+    "location_code": "10366",
+    "location_name": "Mariupol"
+  },
+  {
+    "location_code": "1093",
+    "location_name": "Maykop"
+  },
+  {
+    "location_code": "10367",
+    "location_name": "Melitopol"
+  },
+  {
+    "location_code": "20271",
+    "location_name": "Mexico"
+  },
+  {
+    "location_code": "11287",
+    "location_name": "Mezhdurechensk"
+  },
+  {
+    "location_code": "11212",
+    "location_name": "Miass"
+  },
+  {
+    "location_code": "1004",
+    "location_name": "Middle East"
+  },
+  {
+    "location_code": "1054",
+    "location_name": "Middle East / Other"
+  },
+  {
+    "location_code": "1055",
+    "location_name": "Middle East / Universal"
+  },
+  {
+    "location_code": "11063",
+    "location_name": "Mineral waters"
+  },
+  {
+    "location_code": "11053",
+    "location_name": "Mines"
+  },
+  {
+    "location_code": "157",
+    "location_name": "Minsk"
+  },
+  {
+    "location_code": "29630",
+    "location_name": "Minsk region"
+  },
+  {
+    "location_code": "101853",
+    "location_name": "Minsk region / Other"
+  },
+  {
+    "location_code": "101852",
+    "location_name": "Minsk Region / Universal"
+  },
+  {
+    "location_code": "158",
+    "location_name": "Mogilev"
+  },
+  {
+    "location_code": "29629",
+    "location_name": "Mogilev oblast"
+  },
+  {
+    "location_code": "101863",
+    "location_name": "Mogilev region / Other"
+  },
+  {
+    "location_code": "101862",
+    "location_name": "Mogilev region / Universal"
+  },
+  {
+    "location_code": "208",
+    "location_name": "Moldova"
+  },
+  {
+    "location_code": "115674",
+    "location_name": "Moldova / Other"
+  },
+  {
+    "location_code": "115675",
+    "location_name": "Moldova / Universal"
+  },
+  {
+    "location_code": "21610",
+    "location_name": "Montenegro"
+  },
+  {
+    "location_code": "10668",
+    "location_name": "Moore"
+  },
+  {
+    "location_code": "11117",
+    "location_name": "Mordovia"
+  },
+  {
+    "location_code": "213",
+    "location_name": "Moscow"
+  },
+  {
+    "location_code": "1",
+    "location_name": "Moscow and the region"
+  },
+  {
+    "location_code": "349",
+    "location_name": "Moscow and the region / Other cities in the region"
+  },
+  {
+    "location_code": "350",
+    "location_name": "Moscow and the region / Universal"
+  },
+  {
+    "location_code": "99",
+    "location_name": "Munich"
+  },
+  {
+    "location_code": "10897",
+    "location_name": "Murmansk Oblast"
+  },
+  {
+    "location_code": "21901",
+    "location_name": "Murmansk region / Other"
+  },
+  {
+    "location_code": "21900",
+    "location_name": "Murmansk region / Universal"
+  },
+  {
+    "location_code": "20543",
+    "location_name": "Mykolaiv Oblast"
+  },
+  {
+    "location_code": "102461",
+    "location_name": "Mykolaiv region / Other"
+  },
+  {
+    "location_code": "10740",
+    "location_name": "Mytishchi"
+  },
+  {
+    "location_code": "236",
+    "location_name": "Naberezhnye Chelny"
+  },
+  {
+    "location_code": "974",
+    "location_name": "Nakhodka"
+  },
+  {
+    "location_code": "1092",
+    "location_name": "Nazran"
+  },
+  {
+    "location_code": "11114",
+    "location_name": "Neftekamsk"
+  },
+  {
+    "location_code": "10176",
+    "location_name": "Nenets Autonomous Okrug"
+  },
+  {
+    "location_code": "118",
+    "location_name": "Netherlands"
+  },
+  {
+    "location_code": "11064",
+    "location_name": "Nevinnomyssk"
+  },
+  {
+    "location_code": "202",
+    "location_name": "New York"
+  },
+  {
+    "location_code": "139",
+    "location_name": "New Zealand"
+  },
+  {
+    "location_code": "148",
+    "location_name": "Nikolaev"
+  },
+  {
+    "location_code": "102486",
+    "location_name": "Nikolaev region / Universal"
+  },
+  {
+    "location_code": "11127",
+    "location_name": "Nizhnekamsk"
+  },
+  {
+    "location_code": "1091",
+    "location_name": "Nizhnevartovsk"
+  },
+  {
+    "location_code": "11168",
+    "location_name": "Nizhniy Tagil"
+  },
+  {
+    "location_code": "11079",
+    "location_name": "Nizhny Novgorod Region"
+  },
+  {
+    "location_code": "21842",
+    "location_name": "Nizhny Novgorod Region / Other"
+  },
+  {
+    "location_code": "21841",
+    "location_name": "Nizhny Novgorod Region / Universal"
+  },
+  {
+    "location_code": "10742",
+    "location_name": "Noginsk"
+  },
+  {
+    "location_code": "11311",
+    "location_name": "Norilsk"
+  },
+  {
+    "location_code": "10002",
+    "location_name": "North America"
+  },
+  {
+    "location_code": "102444",
+    "location_name": "North Caucasus"
+  },
+  {
+    "location_code": "102445",
+    "location_name": "North Caucasus / Other cities in the region"
+  },
+  {
+    "location_code": "102446",
+    "location_name": "North Caucasus / Universal"
+  },
+  {
+    "location_code": "29416",
+    "location_name": "North Kazakhstan"
+  },
+  {
+    "location_code": "102506",
+    "location_name": "North Kazakhstan region / Other"
+  },
+  {
+    "location_code": "102520",
+    "location_name": "North Kazakhstan region / Universal"
+  },
+  {
+    "location_code": "445",
+    "location_name": "North-West / Other cities in the region"
+  },
+  {
+    "location_code": "446",
+    "location_name": "North-West / Universal"
+  },
+  {
+    "location_code": "119",
+    "location_name": "Norway"
+  },
+  {
+    "location_code": "10904",
+    "location_name": "Novgorod Oblast"
+  },
+  {
+    "location_code": "21903",
+    "location_name": "Novgorod region / Other"
+  },
+  {
+    "location_code": "21902",
+    "location_name": "Novgorod region / Universal"
+  },
+  {
+    "location_code": "238",
+    "location_name": "Novocherkassk"
+  },
+  {
+    "location_code": "237",
+    "location_name": "Novokuznetsk"
+  },
+  {
+    "location_code": "10830",
+    "location_name": "Novomoskovsk"
+  },
+  {
+    "location_code": "970",
+    "location_name": "Novorossiysk"
+  },
+  {
+    "location_code": "11316",
+    "location_name": "Novosibirsk region"
+  },
+  {
+    "location_code": "21805",
+    "location_name": "Novosibirsk region / Other"
+  },
+  {
+    "location_code": "21804",
+    "location_name": "Novosibirsk Region / Universal"
+  },
+  {
+    "location_code": "11170",
+    "location_name": "Novoural'sk"
+  },
+  {
+    "location_code": "967",
+    "location_name": "Obninsk"
+  },
+  {
+    "location_code": "145",
+    "location_name": "Odessa"
+  },
+  {
+    "location_code": "20541",
+    "location_name": "Odessa region"
+  },
+  {
+    "location_code": "102460",
+    "location_name": "Odessa region / Other"
+  },
+  {
+    "location_code": "102485",
+    "location_name": "Odessa region / Universal"
+  },
+  {
+    "location_code": "10743",
+    "location_name": "Odintsovo"
+  },
+  {
+    "location_code": "11318",
+    "location_name": "Omsk region"
+  },
+  {
+    "location_code": "21807",
+    "location_name": "Omsk region / Other"
+  },
+  {
+    "location_code": "21806",
+    "location_name": "Omsk region / Universal"
+  },
+  {
+    "location_code": "10745",
+    "location_name": "Orekhovo-"
+  },
+  {
+    "location_code": "21843",
+    "location_name": "Oren Universal"
+  },
+  {
+    "location_code": "11084",
+    "location_name": "Orenburg region"
+  },
+  {
+    "location_code": "21844",
+    "location_name": "Orenburg region / Other"
+  },
+  {
+    "location_code": "11091",
+    "location_name": "Orsk"
+  },
+  {
+    "location_code": "10772",
+    "location_name": "Oryol Oblast"
+  },
+  {
+    "location_code": "21928",
+    "location_name": "Oryol region / Other"
+  },
+  {
+    "location_code": "21929",
+    "location_name": "Oryol region / Other"
+  },
+  {
+    "location_code": "669",
+    "location_name": "Other"
+  },
+  {
+    "location_code": "21943",
+    "location_name": "Other"
+  },
+  {
+    "location_code": "102469",
+    "location_name": "Other"
+  },
+  {
+    "location_code": "11214",
+    "location_name": "Ozersk"
+  },
+  {
+    "location_code": "190",
+    "location_name": "Pavlodar"
+  },
+  {
+    "location_code": "102517",
+    "location_name": "Pavlodar Province / Universal"
+  },
+  {
+    "location_code": "29415",
+    "location_name": "Pavlodar region"
+  },
+  {
+    "location_code": "102503",
+    "location_name": "Pavlodar region / Other"
+  },
+  {
+    "location_code": "10746",
+    "location_name": "Pavlovsky Posad"
+  },
+  {
+    "location_code": "11095",
+    "location_name": "Penza region"
+  },
+  {
+    "location_code": "21846",
+    "location_name": "Penza region / Other"
+  },
+  {
+    "location_code": "21845",
+    "location_name": "Penza region / Universal"
+  },
+  {
+    "location_code": "10837",
+    "location_name": "Pereslavl"
+  },
+  {
+    "location_code": "11108",
+    "location_name": "Perm"
+  },
+  {
+    "location_code": "21848",
+    "location_name": "Perm region / Other"
+  },
+  {
+    "location_code": "21847",
+    "location_name": "Perm region / Universal"
+  },
+  {
+    "location_code": "11171",
+    "location_name": "Pervouralsk"
+  },
+  {
+    "location_code": "78",
+    "location_name": "Petropavlovsk-Kamchatsky"
+  },
+  {
+    "location_code": "10747",
+    "location_name": "Podolsk"
+  },
+  {
+    "location_code": "120",
+    "location_name": "Poland"
+  },
+  {
+    "location_code": "964",
+    "location_name": "Poltava"
+  },
+  {
+    "location_code": "20549",
+    "location_name": "Poltava region"
+  },
+  {
+    "location_code": "102450",
+    "location_name": "Poltava region / Others"
+  },
+  {
+    "location_code": "102475",
+    "location_name": "Poltava region / Universal"
+  },
+  {
+    "location_code": "21780",
+    "location_name": "Primor / Other"
+  },
+  {
+    "location_code": "21779",
+    "location_name": "Primor / Universal"
+  },
+  {
+    "location_code": "11409",
+    "location_name": "Primorsky Territory"
+  },
+  {
+    "location_code": "11291",
+    "location_name": "Prokopevsk"
+  },
+  {
+    "location_code": "10926",
+    "location_name": "Pskov Oblast"
+  },
+  {
+    "location_code": "21905",
+    "location_name": "Pskov region / Other"
+  },
+  {
+    "location_code": "21904",
+    "location_name": "Pskov region / Universal"
+  },
+  {
+    "location_code": "217",
+    "location_name": "Puschino"
+  },
+  {
+    "location_code": "10748",
+    "location_name": "Pushkino"
+  },
+  {
+    "location_code": "11067",
+    "location_name": "Pyatigorsk"
+  },
+  {
+    "location_code": "21622",
+    "location_name": "Railway"
+  },
+  {
+    "location_code": "10750",
+    "location_name": "Ramenskoye"
+  },
+  {
+    "location_code": "11004",
+    "location_name": "Republic of Adygea"
+  },
+  {
+    "location_code": "21873",
+    "location_name": "Republic of Adygea / Other"
+  },
+  {
+    "location_code": "21872",
+    "location_name": "Republic of Adygea / Universal"
+  },
+  {
+    "location_code": "10231",
+    "location_name": "Republic of Altai"
+  },
+  {
+    "location_code": "21850",
+    "location_name": "Republic of Bashkortostan / Other"
+  },
+  {
+    "location_code": "21849",
+    "location_name": "Republic of Bashkortostan / Universal"
+  },
+  {
+    "location_code": "21811",
+    "location_name": "Republic of Buryatia / Other"
+  },
+  {
+    "location_code": "21810",
+    "location_name": "Republic of Buryatia / Universal"
+  },
+  {
+    "location_code": "21875",
+    "location_name": "Republic of Dagestan / Other"
+  },
+  {
+    "location_code": "21874",
+    "location_name": "Republic of Dagestan / Universal"
+  },
+  {
+    "location_code": "21877",
+    "location_name": "Republic of Ingushetia / Other"
+  },
+  {
+    "location_code": "21876",
+    "location_name": "Republic of Ingushetia / Universal"
+  },
+  {
+    "location_code": "21878",
+    "location_name": "Republic of Kabardia"
+  },
+  {
+    "location_code": "11013",
+    "location_name": "Republic of Kabardino-Balkaria"
+  },
+  {
+    "location_code": "21881",
+    "location_name": "Republic of Kalmykia / Other"
+  },
+  {
+    "location_code": "21880",
+    "location_name": "Republic of Kalmykia / Universal"
+  },
+  {
+    "location_code": "10950",
+    "location_name": "Republic of Karelia"
+  },
+  {
+    "location_code": "21907",
+    "location_name": "Republic of Karelia / Other"
+  },
+  {
+    "location_code": "21906",
+    "location_name": "Republic of Karelia / Universal"
+  },
+  {
+    "location_code": "21815",
+    "location_name": "Republic of Khakassia / Other"
+  },
+  {
+    "location_code": "21814",
+    "location_name": "Republic of Khakassia / Universal"
+  },
+  {
+    "location_code": "11077",
+    "location_name": "Republic of Mari El"
+  },
+  {
+    "location_code": "21853",
+    "location_name": "Republic of Mordovia / Other"
+  },
+  {
+    "location_code": "21852",
+    "location_name": "Republic of Mordovia / Universal"
+  },
+  {
+    "location_code": "11021",
+    "location_name": "Republic of North Ossetia-Alania"
+  },
+  {
+    "location_code": "21885",
+    "location_name": "Republic of North Ossetia-Alania / Others"
+  },
+  {
+    "location_code": "21884",
+    "location_name": "Republic of North Ossetia-Alania / Universal"
+  },
+  {
+    "location_code": "10233",
+    "location_name": "Republic of Tyva"
+  },
+  {
+    "location_code": "21813",
+    "location_name": "Republic of Tyva / Other"
+  },
+  {
+    "location_code": "21621",
+    "location_name": "Reutov"
+  },
+  {
+    "location_code": "10355",
+    "location_name": "Rivne"
+  },
+  {
+    "location_code": "20534",
+    "location_name": "Rivne region"
+  },
+  {
+    "location_code": "102467",
+    "location_name": "Rivne region / Other"
+  },
+  {
+    "location_code": "102492",
+    "location_name": "Rivne region / Universal"
+  },
+  {
+    "location_code": "10838",
+    "location_name": "Rostov"
+  },
+  {
+    "location_code": "11029",
+    "location_name": "Rostov region"
+  },
+  {
+    "location_code": "21887",
+    "location_name": "Rostov Region / Other"
+  },
+  {
+    "location_code": "21886",
+    "location_name": "Rostov Region / Universal"
+  },
+  {
+    "location_code": "11251",
+    "location_name": "Rubtsovsk"
+  },
+  {
+    "location_code": "225",
+    "location_name": "Russia"
+  },
+  {
+    "location_code": "382",
+    "location_name": "Russia / All-Russian"
+  },
+  {
+    "location_code": "381",
+    "location_name": "Russia / Other"
+  },
+  {
+    "location_code": "10776",
+    "location_name": "Ryazan oblast"
+  },
+  {
+    "location_code": "21931",
+    "location_name": "Ryazan region / Other"
+  },
+  {
+    "location_code": "21930",
+    "location_name": "Ryazan region / Universal"
+  },
+  {
+    "location_code": "10839",
+    "location_name": "Rybinsk"
+  },
+  {
+    "location_code": "10820",
+    "location_name": "Rzhev"
+  },
+  {
+    "location_code": "11450",
+    "location_name": "Sakhalin Region"
+  },
+  {
+    "location_code": "21778",
+    "location_name": "Sakhalin Region / Other"
+  },
+  {
+    "location_code": "21777",
+    "location_name": "Sakhalin Region / Universal"
+  },
+  {
+    "location_code": "10937",
+    "location_name": "Sakhtrata"
+  },
+  {
+    "location_code": "10945",
+    "location_name": "Sakhtrata Volgograd Region"
+  },
+  {
+    "location_code": "11115",
+    "location_name": "Salavat"
+  },
+  {
+    "location_code": "11131",
+    "location_name": "Samara region"
+  },
+  {
+    "location_code": "21857",
+    "location_name": "Samara region / Other"
+  },
+  {
+    "location_code": "21856",
+    "location_name": "Samara region / Universal"
+  },
+  {
+    "location_code": "90",
+    "location_name": "San Francisco"
+  },
+  {
+    "location_code": "11152",
+    "location_name": "Sarapul"
+  },
+  {
+    "location_code": "194",
+    "location_name": "Saratov"
+  },
+  {
+    "location_code": "21858",
+    "location_name": "Saratov Oblast / Universal"
+  },
+  {
+    "location_code": "11146",
+    "location_name": "Saratov Region"
+  },
+  {
+    "location_code": "21859",
+    "location_name": "Saratov region / Other"
+  },
+  {
+    "location_code": "11083",
+    "location_name": "Sarov"
+  },
+  {
+    "location_code": "20258",
+    "location_name": "Satis"
+  },
+  {
+    "location_code": "11217",
+    "location_name": "Satka"
+  },
+  {
+    "location_code": "11341",
+    "location_name": "Sayanogorsk"
+  },
+  {
+    "location_code": "91",
+    "location_name": "Seattle"
+  },
+  {
+    "location_code": "180",
+    "location_name": "Serbia"
+  },
+  {
+    "location_code": "10752",
+    "location_name": "Sergiev Posad"
+  },
+  {
+    "location_code": "10754",
+    "location_name": "Serpukhov"
+  },
+  {
+    "location_code": "959",
+    "location_name": "Sevastopol"
+  },
+  {
+    "location_code": "10849",
+    "location_name": "Severodvinsk"
+  },
+  {
+    "location_code": "11351",
+    "location_name": "Seversk"
+  },
+  {
+    "location_code": "10765",
+    "location_name": "Shchelkovo"
+  },
+  {
+    "location_code": "221",
+    "location_name": "Shimkent"
+  },
+  {
+    "location_code": "573",
+    "location_name": "Siberia / Other cities in the region"
+  },
+  {
+    "location_code": "574",
+    "location_name": "Siberia / Universal"
+  },
+  {
+    "location_code": "146",
+    "location_name": "Simferopol"
+  },
+  {
+    "location_code": "121",
+    "location_name": "Slovakia"
+  },
+  {
+    "location_code": "122",
+    "location_name": "Slovenia"
+  },
+  {
+    "location_code": "10795",
+    "location_name": "Smolensk region"
+  },
+  {
+    "location_code": "21933",
+    "location_name": "Smolensk region / Other"
+  },
+  {
+    "location_code": "21932",
+    "location_name": "Smolensk region / Universal"
+  },
+  {
+    "location_code": "11218",
+    "location_name": "Snezhinsk"
+  },
+  {
+    "location_code": "239",
+    "location_name": "Sochi"
+  },
+  {
+    "location_code": "11110",
+    "location_name": "Solikamsk"
+  },
+  {
+    "location_code": "10755",
+    "location_name": "Solnechnogorsk"
+  },
+  {
+    "location_code": "477",
+    "location_name": "South / Other cities in the region"
+  },
+  {
+    "location_code": "478",
+    "location_name": "South / Universal"
+  },
+  {
+    "location_code": "10003",
+    "location_name": "South America"
+  },
+  {
+    "location_code": "29417",
+    "location_name": "South Kazakhstan oblast"
+  },
+  {
+    "location_code": "102507",
+    "location_name": "South Kazakhstan region / Other"
+  },
+  {
+    "location_code": "102521",
+    "location_name": "South Kazakhstan region / Universal"
+  },
+  {
+    "location_code": "29387",
+    "location_name": "South Ossetia"
+  },
+  {
+    "location_code": "204",
+    "location_name": "Spain"
+  },
+  {
+    "location_code": "2",
+    "location_name": "St. Petersburg"
+  },
+  {
+    "location_code": "21893",
+    "location_name": "St. Petersburg and Leningrad Region / Other"
+  },
+  {
+    "location_code": "10174",
+    "location_name": "St. Petersburg and the Leningrad Region"
+  },
+  {
+    "location_code": "21892",
+    "location_name": "St. Petersburg and the Leningrad Region / Universal"
+  },
+  {
+    "location_code": "10649",
+    "location_name": "Stary Oskol"
+  },
+  {
+    "location_code": "11069",
+    "location_name": "Stavropol Territory"
+  },
+  {
+    "location_code": "21889",
+    "location_name": "Stavropol Territory / Other"
+  },
+  {
+    "location_code": "21888",
+    "location_name": "Stavropol Territory / Universal"
+  },
+  {
+    "location_code": "11116",
+    "location_name": "Sterlitamak"
+  },
+  {
+    "location_code": "10756",
+    "location_name": "Stupino"
+  },
+  {
+    "location_code": "101",
+    "location_name": "Stuttgart"
+  },
+  {
+    "location_code": "965",
+    "location_name": "Sumy"
+  },
+  {
+    "location_code": "20552",
+    "location_name": "Sumy region"
+  },
+  {
+    "location_code": "102472",
+    "location_name": "Sumy region / Other"
+  },
+  {
+    "location_code": "102497",
+    "location_name": "Sumy region / Universal"
+  },
+  {
+    "location_code": "973",
+    "location_name": "Surgut"
+  },
+  {
+    "location_code": "10671",
+    "location_name": "Suzdal"
+  },
+  {
+    "location_code": "21827",
+    "location_name": "Sverdlovsk"
+  },
+  {
+    "location_code": "11162",
+    "location_name": "Sverdlovsk region"
+  },
+  {
+    "location_code": "21828",
+    "location_name": "Sverdlovsk Region / Other"
+  },
+  {
+    "location_code": "127",
+    "location_name": "Sweden"
+  },
+  {
+    "location_code": "126",
+    "location_name": "Switzerland"
+  },
+  {
+    "location_code": "11139",
+    "location_name": "Syzran"
+  },
+  {
+    "location_code": "971",
+    "location_name": "Taganrog"
+  },
+  {
+    "location_code": "209",
+    "location_name": "Tajikistan"
+  },
+  {
+    "location_code": "10303",
+    "location_name": "Taldykorgan"
+  },
+  {
+    "location_code": "10802",
+    "location_name": "Tambov region"
+  },
+  {
+    "location_code": "21935",
+    "location_name": "Tambov region / Other"
+  },
+  {
+    "location_code": "21934",
+    "location_name": "Tambov region / Universal"
+  },
+  {
+    "location_code": "11119",
+    "location_name": "Tatarstan"
+  },
+  {
+    "location_code": "21855",
+    "location_name": "Tatarstan / Other"
+  },
+  {
+    "location_code": "21854",
+    "location_name": "Tatarstan / Universal"
+  },
+  {
+    "location_code": "11129",
+    "location_name": "Tchistopol"
+  },
+  {
+    "location_code": "131",
+    "location_name": "Tel Aviv"
+  },
+  {
+    "location_code": "10357",
+    "location_name": "Ternopil"
+  },
+  {
+    "location_code": "20531",
+    "location_name": "Ternopil"
+  },
+  {
+    "location_code": "102466",
+    "location_name": "Ternopil region / Other"
+  },
+  {
+    "location_code": "102491",
+    "location_name": "Ternopil region / Universal"
+  },
+  {
+    "location_code": "995",
+    "location_name": "Thailand"
+  },
+  {
+    "location_code": "10317",
+    "location_name": "Tiraspol"
+  },
+  {
+    "location_code": "11175",
+    "location_name": "Tobolsk"
+  },
+  {
+    "location_code": "240",
+    "location_name": "Togliatti"
+  },
+  {
+    "location_code": "11353",
+    "location_name": "Tomsk region"
+  },
+  {
+    "location_code": "21817",
+    "location_name": "Tomsk Region / Other"
+  },
+  {
+    "location_code": "21816",
+    "location_name": "Tomsk Region / Universal"
+  },
+  {
+    "location_code": "21949",
+    "location_name": "Trans-Baikal Territory"
+  },
+  {
+    "location_code": "21819",
+    "location_name": "Trans-Baikal Territory / Other"
+  },
+  {
+    "location_code": "21818",
+    "location_name": "Trans-Baikal Territory / Universal"
+  },
+  {
+    "location_code": "102470",
+    "location_name": "Transcarpathian region / Other"
+  },
+  {
+    "location_code": "102495",
+    "location_name": "Transcarpathian region / Universal"
+  },
+  {
+    "location_code": "1058",
+    "location_name": "Tuapse"
+  },
+  {
+    "location_code": "10832",
+    "location_name": "Tula region"
+  },
+  {
+    "location_code": "21939",
+    "location_name": "Tula region / Other"
+  },
+  {
+    "location_code": "21938",
+    "location_name": "Tula region / Universal"
+  },
+  {
+    "location_code": "983",
+    "location_name": "Turkey"
+  },
+  {
+    "location_code": "170",
+    "location_name": "Turkmenistan"
+  },
+  {
+    "location_code": "10819",
+    "location_name": "Tver region"
+  },
+  {
+    "location_code": "21937",
+    "location_name": "Tver region / Other"
+  },
+  {
+    "location_code": "21936",
+    "location_name": "Tver region / Universal"
+  },
+  {
+    "location_code": "11391",
+    "location_name": "Tynda"
+  },
+  {
+    "location_code": "11176",
+    "location_name": "Tyumen region"
+  },
+  {
+    "location_code": "21830",
+    "location_name": "Tyumen Region / Other"
+  },
+  {
+    "location_code": "21829",
+    "location_name": "Tyumen Region / Universal"
+  },
+  {
+    "location_code": "21812",
+    "location_name": "Tyva Republic / Universal"
+  },
+  {
+    "location_code": "210",
+    "location_name": "UAE"
+  },
+  {
+    "location_code": "11148",
+    "location_name": "Udmurt Republic"
+  },
+  {
+    "location_code": "21861",
+    "location_name": "Udmurt Republic / Other"
+  },
+  {
+    "location_code": "21860",
+    "location_name": "Udmurt Republic / Universal"
+  },
+  {
+    "location_code": "172",
+    "location_name": "Ufa"
+  },
+  {
+    "location_code": "10840",
+    "location_name": "Uglich"
+  },
+  {
+    "location_code": "187",
+    "location_name": "Ukraine"
+  },
+  {
+    "location_code": "20532",
+    "location_name": "Ukraine / Ivano-Frankivsk region"
+  },
+  {
+    "location_code": "861",
+    "location_name": "Ukraine / Others"
+  },
+  {
+    "location_code": "862",
+    "location_name": "Ukraine / Universal"
+  },
+  {
+    "location_code": "198",
+    "location_name": "Ulan-Ude"
+  },
+  {
+    "location_code": "195",
+    "location_name": "Ulyanovsk"
+  },
+  {
+    "location_code": "11153",
+    "location_name": "Ulyanovsk region"
+  },
+  {
+    "location_code": "21863",
+    "location_name": "Ulyanovsk region / Other"
+  },
+  {
+    "location_code": "21862",
+    "location_name": "Ulyanovsk region / Universal"
+  },
+  {
+    "location_code": "102",
+    "location_name": "United Kingdom"
+  },
+  {
+    "location_code": "318",
+    "location_name": "Universal"
+  },
+  {
+    "location_code": "670",
+    "location_name": "Universal"
+  },
+  {
+    "location_code": "21942",
+    "location_name": "Universal"
+  },
+  {
+    "location_code": "541",
+    "location_name": "Ural / Other cities in the region"
+  },
+  {
+    "location_code": "542",
+    "location_name": "Ural / Universal"
+  },
+  {
+    "location_code": "84",
+    "location_name": "USA"
+  },
+  {
+    "location_code": "637",
+    "location_name": "USA / Other"
+  },
+  {
+    "location_code": "638",
+    "location_name": "USA / Universal"
+  },
+  {
+    "location_code": "11426",
+    "location_name": "Ussuriysk"
+  },
+  {
+    "location_code": "11273",
+    "location_name": "Ust-Ilimsk"
+  },
+  {
+    "location_code": "10306",
+    "location_name": "Ust-Kamenogorsk"
+  },
+  {
+    "location_code": "171",
+    "location_name": "Uzbekistan"
+  },
+  {
+    "location_code": "10358",
+    "location_name": "Uzhhorod"
+  },
+  {
+    "location_code": "10928",
+    "location_name": "Velikiye Luki Oblast"
+  },
+  {
+    "location_code": "10719",
+    "location_name": "Vidnoe"
+  },
+  {
+    "location_code": "963",
+    "location_name": "Vinnytsia"
+  },
+  {
+    "location_code": "20545",
+    "location_name": "Vinnytsia region"
+  },
+  {
+    "location_code": "102452",
+    "location_name": "Vinnytsia region / Other"
+  },
+  {
+    "location_code": "102477",
+    "location_name": "Vinnytsia region / Universal"
+  },
+  {
+    "location_code": "154",
+    "location_name": "Vitebsk"
+  },
+  {
+    "location_code": "29633",
+    "location_name": "Vitebsk"
+  },
+  {
+    "location_code": "101857",
+    "location_name": "Vitebsk region / Other"
+  },
+  {
+    "location_code": "101856",
+    "location_name": "Vitebsk region / Universal"
+  },
+  {
+    "location_code": "192",
+    "location_name": "Vladimir"
+  },
+  {
+    "location_code": "21915",
+    "location_name": "Vladimir region / Other"
+  },
+  {
+    "location_code": "21914",
+    "location_name": "Vladimir region / Universal"
+  },
+  {
+    "location_code": "10658",
+    "location_name": "Vladimirckaya area of"
+  },
+  {
+    "location_code": "75",
+    "location_name": "Vladivostok"
+  },
+  {
+    "location_code": "509",
+    "location_name": "Volga region / Other cities in the region"
+  },
+  {
+    "location_code": "510",
+    "location_name": "Volga region / Universal"
+  },
+  {
+    "location_code": "11036",
+    "location_name": "Volgodonsk"
+  },
+  {
+    "location_code": "21869",
+    "location_name": "Volgograd region / Other"
+  },
+  {
+    "location_code": "21868",
+    "location_name": "Volgograd region / Universal"
+  },
+  {
+    "location_code": "10853",
+    "location_name": "Vologda Oblast"
+  },
+  {
+    "location_code": "21897",
+    "location_name": "Vologda region / Other"
+  },
+  {
+    "location_code": "21896",
+    "location_name": "Vologda region / Universal"
+  },
+  {
+    "location_code": "20550",
+    "location_name": "Volyn region"
+  },
+  {
+    "location_code": "102494",
+    "location_name": "Volyn region / Universal"
+  },
+  {
+    "location_code": "10951",
+    "location_name": "Volzhsky"
+  },
+  {
+    "location_code": "193",
+    "location_name": "Voronezh"
+  },
+  {
+    "location_code": "21917",
+    "location_name": "Voronezh region / Other"
+  },
+  {
+    "location_code": "21916",
+    "location_name": "Voronezh region / Universal"
+  },
+  {
+    "location_code": "10672",
+    "location_name": "Voronezhckaya area"
+  },
+  {
+    "location_code": "969",
+    "location_name": "Vyborg"
+  },
+  {
+    "location_code": "20040",
+    "location_name": "Vyksa"
+  },
+  {
+    "location_code": "87",
+    "location_name": "Washington"
+  },
+  {
+    "location_code": "10733",
+    "location_name": "Wedge"
+  },
+  {
+    "location_code": "102519",
+    "location_name": "West Kazakhstan / Universal"
+  },
+  {
+    "location_code": "29410",
+    "location_name": "West Kazakhstan region"
+  },
+  {
+    "location_code": "102505",
+    "location_name": "West Kazakhstan region / Other"
+  },
+  {
+    "location_code": "10369",
+    "location_name": "White Church"
+  },
+  {
+    "location_code": "74",
+    "location_name": "Yakutsk"
+  },
+  {
+    "location_code": "11470",
+    "location_name": "Yalta"
+  },
+  {
+    "location_code": "21835",
+    "location_name": "Yamal-Nenets Autonomous District / Universal"
+  },
+  {
+    "location_code": "11232",
+    "location_name": "Yamalo-Nenets Autonomous District"
+  },
+  {
+    "location_code": "21836",
+    "location_name": "Yamalo-Nenets Autonomous District / Other"
+  },
+  {
+    "location_code": "10841",
+    "location_name": "Yaroslavl Oblast"
+  },
+  {
+    "location_code": "21940",
+    "location_name": "Yaroslavl Oblast / Universal"
+  },
+  {
+    "location_code": "21941",
+    "location_name": "Yaroslavl region / Other"
+  },
+  {
+    "location_code": "10993",
+    "location_name": "Yeisk"
+  },
+  {
+    "location_code": "11123",
+    "location_name": "Yelabuga"
+  },
+  {
+    "location_code": "11463",
+    "location_name": "Yevpatoriya"
+  },
+  {
+    "location_code": "80",
+    "location_name": "Yuzhno-Sakhalinsk"
+  },
+  {
+    "location_code": "20530",
+    "location_name": "Zakarpattia oblast"
+  },
+  {
+    "location_code": "20539",
+    "location_name": "Zaporizhia Oblast"
+  },
+  {
+    "location_code": "960",
+    "location_name": "Zaporozhye"
+  },
+  {
+    "location_code": "102459",
+    "location_name": "Zaporozhye region / Other"
+  },
+  {
+    "location_code": "102484",
+    "location_name": "Zaporozhye region / Universal"
+  },
+  {
+    "location_code": "11125",
+    "location_name": "Zelenodolsk"
+  },
+  {
+    "location_code": "102511",
+    "location_name": "Zhambyl oblast / Miscellaneous"
+  },
+  {
+    "location_code": "29409",
+    "location_name": "Zhambyl region"
+  },
+  {
+    "location_code": "102525",
+    "location_name": "Zhambyl region / Universal"
+  },
+  {
+    "location_code": "20086",
+    "location_name": "Zheleznogorsk"
+  },
+  {
+    "location_code": "11132",
+    "location_name": "Zhigulevsk"
+  },
+  {
+    "location_code": "26034",
+    "location_name": "Zhodino"
+  },
+  {
+    "location_code": "20571",
+    "location_name": "Zhukovsky"
+  },
+  {
+    "location_code": "10343",
+    "location_name": "Zhytomyr"
+  },
+  {
+    "location_code": "20547",
+    "location_name": "Zhytomyr region"
+  },
+  {
+    "location_code": "102454",
+    "location_name": "Zhytomyr region / Other"
+  },
+  {
+    "location_code": "102479",
+    "location_name": "Zhytomyr region / Universal"
+  }
+]
